@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="简介
+本文主要讲我们日常开发中用到的两种锁：
+悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果">
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Rails 中乐观锁与悲观锁的使用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介 本文主要讲我们日常开发中用到的两种锁： 悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果发现在这个过程中，数据发生了改变，那么直接拒绝此次事务提交。乐观锁适合在资源争用不激烈的时候使用。">
+<meta name="keywords" content="rails,乐观锁,悲观锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails 中乐观锁与悲观锁的使用">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/Rails-中乐观锁与悲观锁的使用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介 本文主要讲我们日常开发中用到的两种锁： 悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果发现在这个过程中，数据发生了改变，那么直接拒绝此次事务提交。乐观锁适合在资源争用不激烈的时候使用。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-20T01:52:52.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails 中乐观锁与悲观锁的使用">
+<meta name="twitter:description" content="简介 本文主要讲我们日常开发中用到的两种锁： 悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果发现在这个过程中，数据发生了改变，那么直接拒绝此次事务提交。乐观锁适合在资源争用不激烈的时候使用。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Rails-中乐观锁与悲观锁的使用" class="post-Rails-中乐观锁与悲观锁的使用 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Rails 中乐观锁与悲观锁的使用
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/19/Rails-中乐观锁与悲观锁的使用/" data-id="cju0n5pjs000njm19jki05j95" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>简介</p>
+<p>本文主要讲我们日常开发中用到的两种锁：</p>
+<p>悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；<br>乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果发现在这个过程中，数据发生了改变，那么直接拒绝此次事务提交。乐观锁适合在资源争用不激烈的时候使用。</p>
+<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>常用场景<br>一般对于资源的争用都可以使用悲观锁，比如电商系统中涉及到订单的部分，比如用户支付完成后可能会同时有多条支付成功的通知（做过支付的都知道一般有同步通知和异步通知），比如订单改价的同时可能用户正在支付等等，对于这种会对订单状态发生改变的操作，我们内部一般对这种操作都做加锁处理。</p>
+<p>使用<br>rails 的 API 文档中有详细的说明：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># select * from accounts where id=1 for update</span></span><br><span class="line">Account.lock.find(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 注意，这种最终会导致一个行锁</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># select * from accounts where name = 'shugo' limit 1 for update</span></span><br><span class="line">Account.where(<span class="string">"name = 'shugo'"</span>).lock(<span class="literal">true</span>).first</span><br><span class="line"><span class="comment"># 注意，这里可不是行锁，这里会是一个表锁</span></span><br><span class="line"><span class="comment"># 注意上面的区别，mysql innodb 里面，对于 "select * from where xxx for update" 的情况，是会锁住整张表的，所以最好不要这样来用。Rails 也提供了一个很方便的方法 with_lock 来锁住单个记录，并且内嵌在事务之中。下面代码中的两段是等价的：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">account = Account.find(<span class="number">1</span>)</span><br><span class="line">Account.transaction <span class="keyword">do</span></span><br><span class="line">    account.lock!</span><br><span class="line">    account.balance -= <span class="number">100</span></span><br><span class="line">    account.save! </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 和下面是等价的</span></span><br><span class="line"></span><br><span class="line">account.with_lock <span class="keyword">do</span></span><br><span class="line">    account.balance -= <span class="number">100</span></span><br><span class="line">    account.save!</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>常用场景<br>悲观锁出错概率小，因为一旦获得锁，其他进程会堵塞，但是也导致速度会受影响，系统开销比较大，不利于并发。乐观锁适用于资源竞争不是那么多的地方，这样系统的开销较小，速度也比较快。</p>
+<p>乐观锁本质上算是一个利用多版本管理来控制并发的技术，如果事务提交之后，数据库发现写入进程传入的版本号与目前数据库中的版本号不一致，说明有其他人已经修改过数据，不再允许本事务的提交。所以，使用乐观锁之前需要给数据库增加一列 :lock_version，Rails会自动识别这一列，像数据库提交数据的时候自动带上。另外，乐观锁是默认打开的，如果要关闭，需要配置一下。</p>
+<p>使用<br>记得使用前添加 lock_version 的字段给相应的表，其他的就是自动的了，如果事务提交失败，那么 Rails 会抛一个 ActiveRecord::StaleObjectError 的异常。</p>
+<p>比如，下面这段代码会进行重试：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">retry_times = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    @order.with_lock <span class="keyword">do</span></span><br><span class="line">        @order.set_paid!</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">rescue</span> ActiveRecord::StaleObjectError =&gt; e</span><br><span class="line">    retry_times -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> retry_times &gt; <span class="number">0</span></span><br><span class="line">        <span class="keyword">retry</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        raise e</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">rescue</span> =&gt; e</span><br><span class="line">    raise e</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的地方<br>一般，使用锁的时候和事务同时使用，所以 with_lock 是用的比较多的，而且尽量使用行锁而不是表锁。<br>另外，也注意异常的处理，需要使用那些会抛异常的方法；<br>对于乐观锁，还需要注意如果是前端操作频繁，那么还需要把 lock_version 写入到 form 表单中，否则起不到锁的作用，这里讲的很详细了</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://railscasts.com/episodes/59-optimistic-locking-revised" target="_blank" rel="noopener">http://railscasts.com/episodes/59-optimistic-locking-revised</a><br><a href="https://blog.engineyard.com/2011/a-guide-to-optimistic-locking" target="_blank" rel="noopener">https://blog.engineyard.com/2011/a-guide-to-optimistic-locking</a><br><a href="http://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html" target="_blank" rel="noopener">http://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html</a></p>
+<h3 id="原帖"><a href="#原帖" class="headerlink" title="原帖"></a>原帖</h3><p><a href="https://ruby-china.org/topics/28963" target="_blank" rel="noopener">https://ruby-china.org/topics/28963</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/19/Rails-中乐观锁与悲观锁的使用/">
+    <time datetime="2018-03-19T10:04:00.000Z" class="entry-date">
+        2018-03-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/乐观锁/">乐观锁</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/悲观锁/">悲观锁</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2018/03/27/rails-数据变化的监控/" rel="prev"><span class="meta-nav">←</span> rails 数据变化的监控</a></span>
+    
+    
+        <span class="nav-next"><a href="/2018/03/19/rails的锁机制/" rel="next">rails的锁机制 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

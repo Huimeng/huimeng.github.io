@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incr">
+  
+
+  
+  
+  
+  
+  
+  
+  <title>String incrementer  | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incremented by 1. If the string does not end with a nu">
+<meta name="keywords" content="ruby,codewars">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String incrementer ">
+<meta property="og:url" content="http://yoursite.com/2018/02/27/String-incrementer/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incremented by 1. If the string does not end with a nu">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-19T07:15:57.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String incrementer ">
+<meta name="twitter:description" content="Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incremented by 1. If the string does not end with a nu">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-String-incrementer" class="post-String-incrementer post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      String incrementer 
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/27/String-incrementer/" data-id="cju0n5pjx000xjm19s2w6dh1d" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incremented by 1. If the string does not end with a number the number 1 should be appended to the new string.</p>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h3><pre><code>foo -&gt; foo1
+
+foobar23 -&gt; foobar24
+
+foo0042 -&gt; foo0043
+
+foo9 -&gt; foo10
+
+foo099 -&gt; foo100
+</code></pre><p>Attention: If the number has leading zeros the amount of digits should be considered.</p>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increment_string</span><span class="params">(input)</span></span></span><br><span class="line">  <span class="comment">#your code here</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">"1"</span> <span class="keyword">if</span> input.empty?</span><br><span class="line">  arr = input.rpartition(<span class="regexp">/\D/</span>)</span><br><span class="line">  <span class="keyword">if</span> arr[-<span class="number">1</span>].empty?</span><br><span class="line">   arr[-<span class="number">1</span>] = <span class="string">"1"</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    arr[-<span class="number">1</span>] = arr[-<span class="number">1</span>].succ</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> arr.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increment_string</span><span class="params">(input)</span></span></span><br><span class="line">  input.sub(<span class="regexp">/\d*$/</span>) &#123; <span class="params">|n|</span> n.empty? ? <span class="number">1</span> : n.succ &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/27/String-incrementer/">
+    <time datetime="2018-02-27T09:41:37.000Z" class="entry-date">
+        2018-02-27
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2018/03/12/为什么需要前后分离/" rel="prev"><span class="meta-nav">←</span> 为什么需要前后分离</a></span>
+    
+    
+        <span class="nav-next"><a href="/2018/02/26/ruby中super和super-的区别/" rel="next">ruby中super和super()的区别 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

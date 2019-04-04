@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk ">
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Reverse or rotate? | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk if its size is less than sz). If a chunk represent">
+<meta name="keywords" content="ruby,codewars">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reverse or rotate?">
+<meta property="og:url" content="http://yoursite.com/2018/02/19/Reverse-or-rotate/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk if its size is less than sz). If a chunk represent">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-19T07:17:27.978Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reverse or rotate?">
+<meta name="twitter:description" content="The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk if its size is less than sz). If a chunk represent">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Reverse-or-rotate" class="post-Reverse-or-rotate post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Reverse or rotate?
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/19/Reverse-or-rotate/" data-id="cju0n5pjt000qjm19xzluf96z" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk if its size is less than sz).</p>
+<p>If a chunk represents an integer such as the sum of the cubes of its digits is divisible by 2, reverse that chunk; otherwise rotate it to the left by one position. Put together these modified chunks and return the result as a string.</p>
+<pre><code>If
+sz is &lt;= 0 or if str is empty return &quot;&quot;
+sz is greater (&gt;) than the length of str it is impossible to take a chunk of size sz hence return &quot;&quot;.
+</code></pre><h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">revrot(<span class="string">"123456987654"</span>, <span class="number">6</span>) --&gt; <span class="string">"234561876549"</span></span><br><span class="line">revrot(<span class="string">"123456987653"</span>, <span class="number">6</span>) --&gt; <span class="string">"234561356789"</span></span><br><span class="line">revrot(<span class="string">"66443875"</span>, <span class="number">4</span>) --&gt; <span class="string">"44668753"</span></span><br><span class="line">revrot(<span class="string">"66443875"</span>, <span class="number">8</span>) --&gt; <span class="string">"64438756"</span></span><br><span class="line">revrot(<span class="string">"664438769"</span>, <span class="number">8</span>) --&gt; <span class="string">"67834466"</span></span><br><span class="line">revrot(<span class="string">"123456779"</span>, <span class="number">8</span>) --&gt; <span class="string">"23456771"</span></span><br><span class="line">revrot(<span class="string">""</span>, <span class="number">8</span>) --&gt; <span class="string">""</span></span><br><span class="line">revrot(<span class="string">"123456779"</span>, <span class="number">0</span>) --&gt; <span class="string">""</span> </span><br><span class="line">revrot(<span class="string">"563000655734469485"</span>, <span class="number">4</span>) --&gt; <span class="string">"0365065073456944"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我的回答：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">    <span class="comment"># your code</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span> <span class="keyword">if</span> sz &gt; str.size <span class="params">||</span> sz &lt;= <span class="number">0</span> <span class="params">||</span> str.empty?</span><br><span class="line">    arr = str.gsub(Regexp.new(<span class="string">"."</span>*sz)).to_a</span><br><span class="line">    new_arr = arr.map &#123;<span class="params">|item|</span> item.chars.map &#123;<span class="params">|t|</span> t.to_i**<span class="number">3</span>&#125;.reduce(<span class="symbol">:+</span>)%<span class="number">2</span>==<span class="number">0</span> ? item.reverse : item[<span class="number">1</span>..-<span class="number">1</span>] + item[<span class="number">0</span>]&#125;</span><br><span class="line">    new_arr.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#其他回答：</span></span><br><span class="line"><span class="comment">#----------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">''</span> <span class="keyword">if</span> sz &lt;= <span class="number">0</span></span><br><span class="line">  chunks = str.scan(<span class="regexp">/.&#123;<span class="subst">#&#123;sz&#125;</span>&#125;/</span>)</span><br><span class="line">  chunks.map <span class="keyword">do</span> <span class="params">|chunk|</span></span><br><span class="line">    digits = chunk.chars</span><br><span class="line">    sum = digits.map &#123;<span class="params">|x|</span> x.to_i ** <span class="number">3</span> &#125;.inject(<span class="symbol">:+</span>)</span><br><span class="line">    sum.even? ? digits.reverse : digits.rotate</span><br><span class="line">  <span class="keyword">end</span>.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#----------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">  str.scan(<span class="regexp">/.&#123;<span class="subst">#&#123;sz&#125;</span>&#125;/</span>).map &#123; <span class="params">|s|</span> cubes_sum_even?(s.chars) &#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cubes_sum_even?</span><span class="params">(arr)</span></span></span><br><span class="line">  arr.reduce(<span class="number">0</span>) &#123; <span class="params">|s, i|</span> s += i.to_i**<span class="number">3</span>&#125;.even? ? arr.join.reverse! : arr.rotate!(<span class="number">1</span>).join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#----------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">''</span> <span class="keyword">if</span> str.empty? <span class="params">||</span> sz &lt;= <span class="number">0</span> <span class="params">||</span> sz &gt; str.length</span><br><span class="line">  str.scan(Regexp.new(<span class="string">"\\d&#123;<span class="subst">#&#123;sz&#125;</span>&#125;"</span>)).map &#123; <span class="params">|i|</span> i.chars.map(&amp;<span class="symbol">:to_i</span>).inject(&amp;<span class="symbol">:+</span>).even? ? i.reverse : lrotate(i) &#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lrotate</span><span class="params">(str)</span></span></span><br><span class="line">  <span class="keyword">return</span> str <span class="keyword">if</span> str.<span class="literal">nil</span>? <span class="params">||</span> str.length &lt; <span class="number">2</span></span><br><span class="line">  str[<span class="number">1</span>...str.length] + str[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#----------</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/19/Reverse-or-rotate/">
+    <time datetime="2018-02-19T08:16:30.000Z" class="entry-date">
+        2018-02-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2018/02/20/Product-of-consecutive-Fib-numbers/" rel="prev"><span class="meta-nav">←</span> Product of consecutive Fib numbers</a></span>
+    
+    
+        <span class="nav-next"><a href="/2018/02/18/Unique-In-Order/" rel="next">Unique In Order <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

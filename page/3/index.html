@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-Dubstep" class="post-Dubstep post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/21/Dubstep/">Dubstep</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/21/Dubstep/" data-id="cju0n5pjf0007jm1957l4h0ei" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>Polycarpus works as a DJ in the best Berland nightclub, and he often uses dubstep music in his performance. Recently, he has decided to take a couple of old songs and make dubstep remixes from them.</p>
+<p>Let’s assume that a song consists of some number of words. To make the dubstep remix of this song, Polycarpus inserts a certain number of words “WUB” before the first word of the song (the number may be zero), after the last word (the number may be zero), and between words (at least one between any pair of neighbouring words), and then the boy glues together all the words, including “WUB”, in one string and plays the song at the club.</p>
+<p>For example, a song with words “I AM X” can transform into a dubstep remix as “WUBWUBIWUBAMWUBWUBX” and cannot transform into “WUBWUBIAMWUBX”.</p>
+<p>Recently, Jonny has heard Polycarpus’s new dubstep track, but since he isn’t into modern music, he decided to find out what was the initial song that Polycarpus remixed. Help Jonny restore the original song.</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>The input consists of a single non-empty string, consisting only of uppercase English letters, the string’s length doesn’t exceed 200 characters</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>Return the words of the initial song that Polycarpus used to make a dubsteb remix. Separate the words with a space.</p>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><pre><code>song_decoder(&quot;WUBWEWUBAREWUBWUBTHEWUBCHAMPIONSWUBMYWUBFRIENDWUB&quot;)
+    #  =&gt;  WE ARE THE CHAMPIONS MY FRIEND
+</code></pre><h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def song_decoder(song)</span><br><span class="line">  song.split(&quot;WUB&quot;).delete_if  &#123; |item| item == &quot;&quot; &#125;.join(&quot; &quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">def song_decoder(song)</span><br><span class="line">  song.gsub(/(WUB)+/, &apos; &apos;).strip</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">def song_decoder(song)</span><br><span class="line">  song.split(&quot;WUB&quot;).join(&quot; &quot;).split.join(&quot; &quot;)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/21/Dubstep/">
+    <time datetime="2018-02-21T12:56:23.000Z" class="entry-date">
+        2018-02-21
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Product-of-consecutive-Fib-numbers" class="post-Product-of-consecutive-Fib-numbers post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/20/Product-of-consecutive-Fib-numbers/">Product of consecutive Fib numbers</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/20/Product-of-consecutive-Fib-numbers/" data-id="cju0n5pjk000djm1927lzp9xe" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>The Fibonacci numbers are the numbers in the following integer sequence (Fn):</p>
+<pre><code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, ...
+</code></pre><p>such as</p>
+<pre><code>F(n) = F(n-1) + F(n-2) with F(0) = 0 and F(1) = 1.
+</code></pre><p>Given a number, say prod (for product), we search two Fibonacci numbers F(n) and F(n+1) verifying</p>
+<pre><code>F(n) * F(n+1) = prod.
+</code></pre><p>Your function productFib takes an integer (prod) and returns an array:</p>
+<p>[F(n), F(n+1), true] or {F(n), F(n+1), 1} or (F(n), F(n+1), True)</p>
+<p>depending on the language if F(n) * F(n+1) = prod.</p>
+<p>If you don’t find two consecutive F(m) verifying F(m) * F(m+1) = prodyou will return</p>
+<p>[F(m), F(m+1), false] or {F(n), F(n+1), 0} or (F(n), F(n+1), False)</p>
+<p>F(m) being the smallest one such as F(m) * F(m+1) &gt; prod.<br>Examples</p>
+<p>productFib(714) # should return [21, 34, true], </p>
+<pre><code># since F(8) = 21, F(9) = 34 and 714 = 21 * 34
+</code></pre><p>productFib(800) # should return [34, 55, false], </p>
+<pre><code># since F(8) = 21, F(9) = 34, F(10) = 55 and 21 * 34 &lt; 800 &lt; 34 * 55
+</code></pre><p>Notes: Not useful here but we can tell how to choose the number n up to which to go: we can use the “golden ratio” phi which is (1 + sqrt(5))/2 knowing that F(n) is asymptotic to: phi^n / sqrt(5). That gives a possible upper bound to n.</p>
+<p>You can see examples in “Example test”.</p>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">productFib</span><span class="params">(prod)</span></span></span><br><span class="line">  fn, fn1 = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span> fn*fn1 &lt; prod <span class="keyword">do</span></span><br><span class="line">    fn, fn1 = fn1, fn + fn1</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  [fn,fn1,fn*fn1 == prod]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">productFib</span><span class="params">(prod)</span></span></span><br><span class="line">  a, b = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">  <span class="keyword">while</span> prod &gt; a * b</span><br><span class="line">    a, b = [b, a + b]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  [a, b, prod == a * b]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">productFib</span><span class="params">(prod)</span></span></span><br><span class="line">  fib = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">  <span class="keyword">until</span> fib.reduce(<span class="symbol">:*</span>) &gt;= prod</span><br><span class="line">    fib &lt;&lt; fib.shift + fib.first</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  fib.reduce(<span class="symbol">:*</span>) == prod ? fib &lt;&lt; <span class="literal">true</span> : fib &lt;&lt; <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">productFib</span><span class="params">(prod)</span></span></span><br><span class="line">  a, b = <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">  a, b = a + b, a <span class="keyword">while</span> a * b &lt; prod</span><br><span class="line">  [b, a, a * b == prod]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/20/Product-of-consecutive-Fib-numbers/">
+    <time datetime="2018-02-20T01:36:43.000Z" class="entry-date">
+        2018-02-20
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Reverse-or-rotate" class="post-Reverse-or-rotate post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/19/Reverse-or-rotate/">Reverse or rotate?</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/19/Reverse-or-rotate/" data-id="cju0n5pjt000qjm19xzluf96z" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk if its size is less than sz).</p>
+<p>If a chunk represents an integer such as the sum of the cubes of its digits is divisible by 2, reverse that chunk; otherwise rotate it to the left by one position. Put together these modified chunks and return the result as a string.</p>
+<pre><code>If
+sz is &lt;= 0 or if str is empty return &quot;&quot;
+sz is greater (&gt;) than the length of str it is impossible to take a chunk of size sz hence return &quot;&quot;.
+</code></pre><h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">revrot(<span class="string">"123456987654"</span>, <span class="number">6</span>) --&gt; <span class="string">"234561876549"</span></span><br><span class="line">revrot(<span class="string">"123456987653"</span>, <span class="number">6</span>) --&gt; <span class="string">"234561356789"</span></span><br><span class="line">revrot(<span class="string">"66443875"</span>, <span class="number">4</span>) --&gt; <span class="string">"44668753"</span></span><br><span class="line">revrot(<span class="string">"66443875"</span>, <span class="number">8</span>) --&gt; <span class="string">"64438756"</span></span><br><span class="line">revrot(<span class="string">"664438769"</span>, <span class="number">8</span>) --&gt; <span class="string">"67834466"</span></span><br><span class="line">revrot(<span class="string">"123456779"</span>, <span class="number">8</span>) --&gt; <span class="string">"23456771"</span></span><br><span class="line">revrot(<span class="string">""</span>, <span class="number">8</span>) --&gt; <span class="string">""</span></span><br><span class="line">revrot(<span class="string">"123456779"</span>, <span class="number">0</span>) --&gt; <span class="string">""</span> </span><br><span class="line">revrot(<span class="string">"563000655734469485"</span>, <span class="number">4</span>) --&gt; <span class="string">"0365065073456944"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我的回答：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">    <span class="comment"># your code</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span> <span class="keyword">if</span> sz &gt; str.size <span class="params">||</span> sz &lt;= <span class="number">0</span> <span class="params">||</span> str.empty?</span><br><span class="line">    arr = str.gsub(Regexp.new(<span class="string">"."</span>*sz)).to_a</span><br><span class="line">    new_arr = arr.map &#123;<span class="params">|item|</span> item.chars.map &#123;<span class="params">|t|</span> t.to_i**<span class="number">3</span>&#125;.reduce(<span class="symbol">:+</span>)%<span class="number">2</span>==<span class="number">0</span> ? item.reverse : item[<span class="number">1</span>..-<span class="number">1</span>] + item[<span class="number">0</span>]&#125;</span><br><span class="line">    new_arr.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#其他回答：</span></span><br><span class="line"><span class="comment">#----------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">''</span> <span class="keyword">if</span> sz &lt;= <span class="number">0</span></span><br><span class="line">  chunks = str.scan(<span class="regexp">/.&#123;<span class="subst">#&#123;sz&#125;</span>&#125;/</span>)</span><br><span class="line">  chunks.map <span class="keyword">do</span> <span class="params">|chunk|</span></span><br><span class="line">    digits = chunk.chars</span><br><span class="line">    sum = digits.map &#123;<span class="params">|x|</span> x.to_i ** <span class="number">3</span> &#125;.inject(<span class="symbol">:+</span>)</span><br><span class="line">    sum.even? ? digits.reverse : digits.rotate</span><br><span class="line">  <span class="keyword">end</span>.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#----------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">  str.scan(<span class="regexp">/.&#123;<span class="subst">#&#123;sz&#125;</span>&#125;/</span>).map &#123; <span class="params">|s|</span> cubes_sum_even?(s.chars) &#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cubes_sum_even?</span><span class="params">(arr)</span></span></span><br><span class="line">  arr.reduce(<span class="number">0</span>) &#123; <span class="params">|s, i|</span> s += i.to_i**<span class="number">3</span>&#125;.even? ? arr.join.reverse! : arr.rotate!(<span class="number">1</span>).join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#----------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revrot</span><span class="params">(str, sz)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">''</span> <span class="keyword">if</span> str.empty? <span class="params">||</span> sz &lt;= <span class="number">0</span> <span class="params">||</span> sz &gt; str.length</span><br><span class="line">  str.scan(Regexp.new(<span class="string">"\\d&#123;<span class="subst">#&#123;sz&#125;</span>&#125;"</span>)).map &#123; <span class="params">|i|</span> i.chars.map(&amp;<span class="symbol">:to_i</span>).inject(&amp;<span class="symbol">:+</span>).even? ? i.reverse : lrotate(i) &#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lrotate</span><span class="params">(str)</span></span></span><br><span class="line">  <span class="keyword">return</span> str <span class="keyword">if</span> str.<span class="literal">nil</span>? <span class="params">||</span> str.length &lt; <span class="number">2</span></span><br><span class="line">  str[<span class="number">1</span>...str.length] + str[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#----------</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/19/Reverse-or-rotate/">
+    <time datetime="2018-02-19T08:16:30.000Z" class="entry-date">
+        2018-02-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Unique-In-Order" class="post-Unique-In-Order post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/18/Unique-In-Order/">Unique In Order</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/18/Unique-In-Order/" data-id="cju0n5pk30017jm19otw7kac3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>mplement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.</p>
+<h3 id="For-example"><a href="#For-example" class="headerlink" title="For example:"></a>For example:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unique_in_order(&apos;AAAABBBCCDAABBB&apos;) == [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;A&apos;, &apos;B&apos;]</span><br><span class="line">unique_in_order(&apos;ABBCcAD&apos;)         == [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;c&apos;, &apos;A&apos;, &apos;D&apos;]</span><br><span class="line">unique_in_order([1,2,2,3,3])       == [1,2,3]</span><br></pre></td></tr></table></figure>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer:"></a>Answer:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我的回答：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unique_in_order</span><span class="params">(iterable)</span></span></span><br><span class="line">  <span class="comment">#your code here</span></span><br><span class="line">  arr = []</span><br><span class="line">  base_arr = []</span><br><span class="line">  <span class="keyword">if</span> iterable.<span class="keyword">class</span>.to_s == <span class="string">"String"</span></span><br><span class="line">    base_arr = iterable.chars</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    base_arr = iterable</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  base_arr.each &#123;<span class="params">|item|</span> arr &lt;&lt; item <span class="keyword">if</span> arr[-<span class="number">1</span>] != item&#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#大佬们的回答：</span></span><br><span class="line"><span class="comment">#1、</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unique_in_order</span><span class="params">(iterable)</span></span></span><br><span class="line">  (iterable.is_a?(String) ? iterable.chars : iterable).chunk &#123; <span class="params">|x|</span> x &#125;.map(&amp;<span class="symbol">:first</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#2、</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unique_in_order</span><span class="params">(seq)</span></span></span><br><span class="line">  (<span class="number">0</span>...seq.length).reduce([]) &#123;<span class="params">|a, i|</span> seq[i] != a.last ? a &lt;&lt; seq[i] : a &#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#3、</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unique_in_order</span><span class="params">(iterable)</span></span></span><br><span class="line">  it_array= []</span><br><span class="line">  iterable.length.times <span class="keyword">do</span> <span class="params">|x|</span></span><br><span class="line">    it_array &lt;&lt; iterable[x] <span class="keyword">if</span> iterable[x] != iterable[x+<span class="number">1</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  it_array</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/18/Unique-In-Order/">
+    <time datetime="2018-02-18T05:30:36.000Z" class="entry-date">
+        2018-02-18
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Does-my-number-look-big-in-this" class="post-Does-my-number-look-big-in-this post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/17/Does-my-number-look-big-in-this/">Does my number look big in this?</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/17/Does-my-number-look-big-in-this/" data-id="cju0n5pj30000jm19vedankoc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>A Narcissistic Number is a number which is the sum of its own digits, each raised to the power of the number of digits.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">For example, take 153 (3 digits):</span><br><span class="line">    1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153</span><br><span class="line"></span><br><span class="line">and 1634 (4 digits):</span><br><span class="line"></span><br><span class="line">    1^4 + 6^4 + 3^4 + 4^4 = 1 + 1296 + 81 + 256 = 1634</span><br></pre></td></tr></table></figure>
+<p>The Challenge:</p>
+<p>Your code must return true or false depending upon whether the given number is a Narcissistic number.</p>
+<p>Error checking for text strings or other invalid inputs is not required, only valid integers will be passed into the function.</p>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer:"></a>Answer:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我的回答:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">narcissistic?</span><span class="params">( value )</span></span></span><br><span class="line">  <span class="comment"># Code me</span></span><br><span class="line">  sum = <span class="number">0</span></span><br><span class="line">  value.to_s.split(<span class="string">""</span>).each &#123;<span class="params">|item|</span> sum += item.to_i**value.to_s.size&#125;</span><br><span class="line">  value == sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#大佬们的回答:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">narcissistic?</span><span class="params">( value )</span></span></span><br><span class="line">  value == value.to_s.chars.map &#123; <span class="params">|x|</span> x.to_i**value.to_s.size &#125;.reduce(<span class="symbol">:+</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/17/Does-my-number-look-big-in-this/">
+    <time datetime="2018-02-17T10:59:25.000Z" class="entry-date">
+        2018-02-17
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Growth-of-a-Population" class="post-Growth-of-a-Population post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/17/Growth-of-a-Population/">Growth of a Population</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/17/Growth-of-a-Population/" data-id="cju0n5pjb0003jm196iherpvl" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>In a small town the population is p0 = 1000 at the beginning of a year. The population regularly increases by 2 percent per year and moreover 50 population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town. How many years does the town need to see its population greater or equal to p = 1200 inhabitants?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">At the end of the first year there will be: </span><br><span class="line">1000 + 1000 * 0.02 + 50 =&gt; 1070 inhabitants</span><br><span class="line"></span><br><span class="line">At the end of the 2nd year there will be: </span><br><span class="line">1070 + 1070 * 0.02 + 50 =&gt; 1141 inhabitants (number of inhabitants is an integer)</span><br><span class="line"></span><br><span class="line">At the end of the 3rd year there will be:</span><br><span class="line">1141 + 1141 * 0.02 + 50 =&gt; 1213</span><br><span class="line"></span><br><span class="line">It will need 3 entire years.</span><br></pre></td></tr></table></figure>
+<p>More generally given parameters:</p>
+<p>p0, percent, aug (inhabitants coming or leaving each year), p (population to surpass)</p>
+<p>the function nb_year should return n number of entire years needed to get a population greater or equal to p.</p>
+<p>aug is an integer, percent a positive or null number, p0 and p are positive integers (&gt; 0)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Examples:</span><br><span class="line">nb_year(1500, 5, 100, 5000) -&gt; 15</span><br><span class="line">nb_year(1500000, 2.5, 10000, 2000000) -&gt; 10</span><br><span class="line"></span><br><span class="line">Note: Don&apos;t forget to convert the percent parameter as a percentage in the body of your function: if the parameter percent is 2 you have to convert it to 0.02.</span><br></pre></td></tr></table></figure></p>
+<p>Answer:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我的回答：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nb_year</span><span class="params">(p<span class="number">0</span>, percent, aug, p, t=<span class="number">0</span>)</span></span></span><br><span class="line">    <span class="comment"># your code</span></span><br><span class="line">    p1 = p<span class="number">0</span> + p<span class="number">0</span>*percent/<span class="number">100</span> + aug</span><br><span class="line">    t += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> p1 &lt; p</span><br><span class="line">      nb_year(p1.to_i, percent, aug, p,t)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> t</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#大佬的回答</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nb_year</span><span class="params">(p<span class="number">0</span>, percent, aug, p)</span></span></span><br><span class="line">  percent = <span class="number">0</span> <span class="keyword">if</span> percent.<span class="literal">nil</span>?</span><br><span class="line">  n = <span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> p<span class="number">0</span> &lt; p</span><br><span class="line">    p<span class="number">0</span> = (p<span class="number">0</span> + p<span class="number">0</span> * percent * <span class="number">0</span>.<span class="number">01</span> + aug).to_i</span><br><span class="line">    n += <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  n</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nb_year</span><span class="params">(p<span class="number">0</span>, percent, aug, p, year = <span class="number">0</span>)</span></span></span><br><span class="line">  <span class="keyword">return</span> year <span class="keyword">if</span> p<span class="number">0</span> &gt;= p</span><br><span class="line">  nb_year( ( p<span class="number">0</span> * ( <span class="number">1</span> + ( percent / <span class="number">100.0</span> ) ) + aug ).floor, percent, aug, p, year + <span class="number">1</span> )</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/17/Growth-of-a-Population/">
+    <time datetime="2018-02-17T10:29:49.000Z" class="entry-date">
+        2018-02-17
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Find-the-divisors" class="post-Find-the-divisors post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/17/Find-the-divisors/">Find the divisors! </a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/17/Find-the-divisors/" data-id="cju0n5pj70001jm19bk0h6fi9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>Create a function named divisors/Divisors that takes an integer and returns an array with all of the integer’s divisors(except for 1 and the number itself). If the number is prime return the string ‘(integer) is prime’ (null in C#) (use Either String a in Haskell and Result&lt;Vec<u32>, String&gt; in Rust).</u32></p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">divisors(12) # should return [2,3,4,6]</span><br><span class="line">divisors(25) # should return [5]</span><br><span class="line">divisors(13) # should return &quot;13 is prime&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer:"></a>Answer:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#大佬们的回答：</span></span><br><span class="line"><span class="comment">#1、</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">divisors</span><span class="params">(n)</span></span></span><br><span class="line">  divisors = (<span class="number">2</span>...n).select&#123;<span class="params">|item|</span> n % item == <span class="number">0</span>&#125;</span><br><span class="line">  divisors.empty? ? <span class="string">"<span class="subst">#&#123;n&#125;</span> is prime"</span> : divisors</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">#2、</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'prime'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">divisors</span><span class="params">(n)</span></span></span><br><span class="line">  n.prime? ? <span class="string">"<span class="subst">#&#123;n&#125;</span> is prime"</span> : (<span class="number">2</span>...n).select&#123;<span class="params">|i|</span>n%i==<span class="number">0</span>&#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/17/Find-the-divisors/">
+    <time datetime="2018-02-17T10:13:56.000Z" class="entry-date">
+        2018-02-17
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Format-a-string-of-names-like-Bart-Lisa-Maggie" class="post-Format-a-string-of-names-like-Bart-Lisa-Maggie post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/14/Format-a-string-of-names-like-Bart-Lisa-Maggie/">Format a string of names like &#39;Bart, Lisa &amp; Maggie&#39;.</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/14/Format-a-string-of-names-like-Bart-Lisa-Maggie/" data-id="cju0n5pjc0004jm199tcp8g1k" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="Given-an-array-containing-hashes-of-names"><a href="#Given-an-array-containing-hashes-of-names" class="headerlink" title="Given: an array containing hashes of names"></a>Given: an array containing hashes of names</h2><p>Return: a string formatted as a list of names separated by commas except for the last two names, which should be separated by an ampersand.</p>
+<p>Example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">list([ &#123;name: <span class="string">'Bart'</span>&#125;, &#123;name: <span class="string">'Lisa'</span>&#125;, &#123;name: <span class="string">'Maggie'</span>&#125; ])</span><br><span class="line"><span class="comment"># returns 'Bart, Lisa &amp; Maggie'</span></span><br><span class="line"></span><br><span class="line">list([ &#123;name: <span class="string">'Bart'</span>&#125;, &#123;name: <span class="string">'Lisa'</span>&#125; ])</span><br><span class="line"><span class="comment"># returns 'Bart &amp; Lisa'</span></span><br><span class="line"></span><br><span class="line">list([ &#123;name: <span class="string">'Bart'</span>&#125; ])</span><br><span class="line"><span class="comment"># returns 'Bart'</span></span><br><span class="line"></span><br><span class="line">list([])</span><br><span class="line"><span class="comment"># returns ''</span></span><br></pre></td></tr></table></figure></p>
+<p>Answers:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#大佬们的回答</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list</span><span class="params">(names)</span></span></span><br><span class="line">  names.map(&amp;<span class="symbol">:values</span>).join(<span class="string">', '</span>).reverse.sub(<span class="regexp">/,/</span>, <span class="string">'&amp; '</span>).reverse</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/14/Format-a-string-of-names-like-Bart-Lisa-Maggie/">
+    <time datetime="2018-02-14T11:45:43.000Z" class="entry-date">
+        2018-02-14
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-常用-Git-命令清单" class="post-常用-Git-命令清单 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/01/24/常用-Git-命令清单/">常用 Git 命令清单</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/01/24/常用-Git-命令清单/" data-id="cju0n5pke001rjm196ac5ifqu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="一、-新建代码库"><a href="#一、-新建代码库" class="headerlink" title="一、 新建代码库"></a>一、 新建代码库</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git <span class="built_in">clone</span> [url]</span><br></pre></td></tr></table></figure>
+<h3 id="二、-配置"><a href="#二、-配置" class="headerlink" title="二、 配置"></a>二、 配置</h3><p>Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Git配置文件</span></span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置提交代码时的用户信息</span></span><br><span class="line">$ git config [--global] user.name <span class="string">"[name]"</span></span><br><span class="line">$ git config [--global] user.email <span class="string">"[email address]"</span></span><br></pre></td></tr></table></figure>
+<h3 id="三、-增加-删除文件"><a href="#三、-增加-删除文件" class="headerlink" title="三、 增加/删除文件"></a>三、 增加/删除文件</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加指定文件到暂存区</span></span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定目录到暂存区，包括子目录</span></span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录的所有文件到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加每个变化前，都会要求确认</span></span><br><span class="line"><span class="comment"># 对于同一个文件的多处变化，可以实现分次提交</span></span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除工作区文件，并且将这次删除放入暂存区</span></span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追踪指定文件，但该文件会保留在工作区</span></span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改名文件，并且将这个改名放入暂存区</span></span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
+<h3 id="四、-代码提交"><a href="#四、-代码提交" class="headerlink" title="四、 代码提交"></a>四、 代码提交</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区</span></span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区</span></span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区</span></span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息</span></span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交</span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span></span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化</span></span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br></pre></td></tr></table></figure>
+<h3 id="五、分支"><a href="#五、分支" class="headerlink" title="五、分支"></a>五、分支</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有远程分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支</span></span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支</span></span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支</span></span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit</span></span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系</span></span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区</span></span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到上一个分支</span></span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间</span></span><br><span class="line">$ git branch --<span class="built_in">set</span>-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支</span></span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br></pre></td></tr></table></figure>
+<h3 id="六、标签"><a href="#六、标签" class="headerlink" title="六、标签"></a>六、标签</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有tag</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在当前commit</span></span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在指定commit</span></span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地tag</span></span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag信息</span></span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定tag</span></span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交所有tag</span></span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向某个tag</span></span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure>
+<h3 id="七、查看信息"><a href="#七、查看信息" class="headerlink" title="七、查看信息"></a>七、查看信息</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示有变更的文件</span></span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的版本历史</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示commit历史，以及每次commit发生变更的文件</span></span><br><span class="line">$ git <span class="built_in">log</span> --<span class="built_in">stat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索提交历史，根据关键词</span></span><br><span class="line">$ git <span class="built_in">log</span> -S [keyword]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，每个commit占据一行</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个文件的版本历史，包括文件改名</span></span><br><span class="line">$ git <span class="built_in">log</span> --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件相关的每一次diff</span></span><br><span class="line">$ git <span class="built_in">log</span> -p [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示过去5次提交</span></span><br><span class="line">$ git <span class="built_in">log</span> -5 --pretty --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有提交过的用户，按提交次数排序</span></span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件是什么人在什么时间修改过</span></span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和工作区的差异</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和上一个commit的差异</span></span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示工作区与当前分支最新commit之间的差异</span></span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次提交之间的差异</span></span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示今天你写了多少行代码</span></span><br><span class="line">$ git diff --shortstat <span class="string">"@&#123;0 day ago&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交的元数据和内容变化</span></span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交发生变化的文件</span></span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交时，某个文件的内容</span></span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的最近几次提交</span></span><br><span class="line">$ git reflog</span><br></pre></td></tr></table></figure>
+<h3 id="八、远程同步"><a href="#八、远程同步" class="headerlink" title="八、远程同步"></a>八、远程同步</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载远程仓库的所有变动</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个远程仓库的信息</span></span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个新的远程仓库，并命名</span></span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取回远程仓库的变化，并与本地分支合并</span></span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传本地指定分支到远程仓库</span></span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行推送当前分支到远程仓库，即使有冲突</span></span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送所有分支到远程仓库</span></span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure>
+<h3 id="九、撤销"><a href="#九、撤销" class="headerlink" title="九、撤销"></a>九、撤销</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恢复暂存区的指定文件到工作区</span></span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个commit的指定文件到暂存区和工作区</span></span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复暂存区的所有文件到工作区</span></span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span></span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区与工作区，与上一次commit保持一致</span></span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span></span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span></span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span></span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个commit，用来撤销指定commit</span></span><br><span class="line"><span class="comment"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span></span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂时将未提交的变化移除，稍后再移入</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/01/24/常用-Git-命令清单/">
+    <time datetime="2018-01-24T02:02:06.000Z" class="entry-date">
+        2018-01-24
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-rails-使用mongoid进行模糊查询" class="post-rails-使用mongoid进行模糊查询 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/06/07/rails-使用mongoid进行模糊查询/">rails 使用mongoid进行模糊查询</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/06/07/rails-使用mongoid进行模糊查询/" data-id="cju0n5pk5001cjm19u3aw0m0k" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>使用mongoid进行查询时查询的字段需要使用正则表达进行查询<br>例如查询图书名字中包含ruby的书籍可以使用<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Book.where(<span class="symbol">name:</span> /ruby/)</span><br></pre></td></tr></table></figure></p>
+<p>一句话进行多条件模糊搜索</p>
+<pre><code class="ruby"><span class="function"><span class="keyword">def</span> <span class="title">index</span> </span>
+  conditions = {} 
+  <span class="string">%w{name author book_type }</span>.each{<span class="params">|attr|</span> 
+    conditions[attr]=Regexp.new(params[attr]) <span class="keyword">unless</span> params[attr].blank? 
+   } 
+  @books = Book.where(conditions).order(<span class="string">"updated_at DESC"</span>) 
+<span class="keyword">end</span>
+</code></pre>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2017/06/07/rails-使用mongoid进行模糊查询/">
+    <time datetime="2017-06-07T02:03:35.000Z" class="entry-date">
+        2017-06-07
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模糊查询/">模糊查询</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+  
+    <nav id="pagination">
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      </nav>
+    </nav>
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

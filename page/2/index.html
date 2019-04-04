@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-rails的锁机制" class="post-rails的锁机制 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/03/19/rails的锁机制/">rails的锁机制</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/19/rails的锁机制/" data-id="cju0n5pkb001mjm19bvmalapz" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update<br>一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下：</p>
+<pre><code class="ruby">sku = User.find_by_id(sku_id)  
+ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  <span class="keyword">if</span>(sku.stock &gt; <span class="number">0</span>)  
+    sku.update_attributes!(<span class="symbol">stock:</span> sku.stock - <span class="number">1</span>)  
+    Order.create!(order_attrs)  
+  <span class="keyword">end</span>              
+<span class="keyword">end</span>
+</code></pre>
+<p>在高并发的情况下，会出现这个问题，多个并发都同时执行到并满足第三行代码的条件，if条件下的语句都会执行，就会出现超卖的问题，那么怎么做不会超卖呢？就是加锁。</p>
+<pre><code class="ruby">sku = User.find_by_id(sku_id)  
+ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  sku.lock!  
+  <span class="keyword">if</span>(sku.stock &gt; <span class="number">0</span>)  
+    sku.update_attributes!(<span class="symbol">stock:</span> sku.stock - <span class="number">1</span>)  
+    Order.create!(order_attrs)  
+  <span class="keyword">end</span>              
+<span class="keyword">end</span>
+</code></pre>
+<p>这样就不会出现超卖的情况了，估计有人有疑问，这样不会仍然有超卖的情况吗，多个并发同时执行并满足第四行代码时，if条件下的语句也都会执行，NONO，不是这样的，lock语句会执行: select * from … where … for update，查出的数据是最新的数据，所以不会出现这个问题。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/19/rails的锁机制/">
+    <time datetime="2018-03-19T09:19:22.000Z" class="entry-date">
+        2018-03-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Rails的事务和锁part2" class="post-Rails的事务和锁part2 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/03/18/Rails的事务和锁part2/">Rails的事务和锁part2</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/18/Rails的事务和锁part2/" data-id="cju0n5pjr000ljm19dmna061f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="触发事务回滚"><a href="#触发事务回滚" class="headerlink" title="触发事务回滚"></a>触发事务回滚</h3><p>事务通过 rollback 过程把记录的状态进行重置。在 Rails 中，rollback 只会被一个 exception 触发。这是非常关键的一点，很多事务块中的代码不会触发异常，因此即使出错，事务也不会回滚。比如下面的写法：</p>
+<pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  david.update_attribute(<span class="symbol">:amount</span>, david.amount -<span class="number">100</span>)  
+  mary.update_attribute(<span class="symbol">:amount</span>, <span class="number">100</span>)  
+<span class="keyword">end</span>
+</code></pre>
+<p>因为 Rails 中，#update_attribute 方法在调用失败的时候也不会触发 exception，它只是简单的返回 false ，因此必须确保 transaction 块中的函数在失败时会抛异常。正确的写法是这样的：</p>
+<pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  david.update_attributes!(<span class="symbol">:amount</span> =&gt; -<span class="number">100</span>)  
+  mary.update_attributes!(<span class="symbol">:amount</span> =&gt; <span class="number">100</span>)  
+<span class="keyword">end</span>
+</code></pre>
+<p>这里值得一提的是，Rails 中约定，带有叹号的函数一般会在失败时抛异常，所以我们自己写带有!号的方法也一定要在失败时raise一个异常，这样才符合rails的规范。<br>同时，我也看到一些代码中，在事务块中使用了 #find_by 方法，实际上，find_by 等魔术方法当找不到记录的时候会返回 nil，而 #find 方法在找不到记录的时候会抛出一个ActiveRecord::RecordNotFound 异常。比如下面的例子：</p>
+<pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  david = User.find_by_name(<span class="string">"david"</span>)  
+  <span class="keyword">if</span>(david.id != john.id)  
+    john.update_attributes!(<span class="symbol">:amount</span> =&gt; -<span class="number">100</span>)  
+    mary.update_attributes!(<span class="symbol">:amount</span> =&gt; <span class="number">100</span>)  
+  <span class="keyword">end</span>  
+<span class="keyword">end</span>
+</code></pre>
+<p>发现上面的逻辑错误了吗？nil 对象也有一个 id 方法，导致记录没有被找到的错误被隐藏了。同时，由于 find_by 也不会抛出异常，因此下面的代码被错误的执行了。这就意味着，有的时候在某些场景下，我们需要人工抛异常。因此这段代码因此改成下面的形式:<br>当错误出现时，事务本身会回滚，同时异常也会在外层抛出。因此，你的调用方必须考虑 catch 这个异常，并进行相应的处理。</p>
+<pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  david = User.find_by_name(<span class="string">"david"</span>)  
+  raise ActiveRecord::RecordNotFound <span class="keyword">if</span> david.<span class="literal">nil</span>?  
+  <span class="keyword">if</span>(david.id != john.id)  
+    john.update_attributes!(<span class="symbol">:amount</span> =&gt; -<span class="number">100</span>)  
+    mary.update_attributes!(<span class="symbol">:amount</span> =&gt; <span class="number">100</span>)  
+  <span class="keyword">end</span>  
+<span class="keyword">end</span>
+</code></pre>
+<p>有一个特殊的异常，ActiveRecord::Rollback，当它被抛出时，事务本身会回滚，但是它并不会被重新抛出，因此你也不需要在外部进行 catch 和处理。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/18/Rails的事务和锁part2/">
+    <time datetime="2018-03-18T08:01:06.000Z" class="entry-date">
+        2018-03-18
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务，锁/">事务，锁</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Rails的事务和锁part1" class="post-Rails的事务和锁part1 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/03/17/Rails的事务和锁part1/">Rails的事务和锁part1</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/17/Rails的事务和锁part1/" data-id="cju0n5pjv000sjm19dqcdaohw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="为什么要使用事务"><a href="#为什么要使用事务" class="headerlink" title="为什么要使用事务"></a>为什么要使用事务</h3><p>事务是指并发控制的单位，是用户定义的一个操作序列。简单的来说事务里面的多个操作，要么都不执行，要么一起执行。事务可以帮助开发者保证应用中的数据一致性。常见的使用事务的场景是银行转账，钱从一个账户转移到另外一个账户。如果中间的某一步出错，那么整个过程应该重置（Rollback）。<br>举个银行的例子(伪代码)：</p>
+<p>举个银行的例子(伪代码)：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ActiveRecord::Base.transaction <span class="keyword">do</span>  </span><br><span class="line">  david.withdrawal(<span class="number">100</span>)  </span><br><span class="line">  mary.deposit(<span class="number">100</span>)  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>Rails中，通过ActiveRecord对象的类方法或者实例方法即可实现事务：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Client.transaction <span class="keyword">do</span>  </span><br><span class="line">  @client.users.create!  </span><br><span class="line">  @user.clients(<span class="literal">true</span>).first.destroy!  </span><br><span class="line">  Product.first.destroy!  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">  </span><br><span class="line">@client.transaction <span class="keyword">do</span>  </span><br><span class="line">  @client.users.create!  </span><br><span class="line">  @user.clients(<span class="literal">true</span>).first.destroy!  </span><br><span class="line">  Product.first.destroy!  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>可以看到上面的例子中，每个事务中均含有多个不同的 model 。在同一个事务中调用多个 model 对象是常见的行为，因为事务是和一个数据库连接绑定在一起的，而不是某个 model 对象；而同时，也只有在对多个纪录进行操作，并且希望这些操作作为一个整体的时候，事务才是必要的。<br>另外，Rails 已经把类似 #save 和 #destroy 的方法包含在一个事务中了，因此，对于单条数据库记录来说，不需要再使用显式的调用了。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/17/Rails的事务和锁part1/">
+    <time datetime="2018-03-17T07:00:30.000Z" class="entry-date">
+        2018-03-17
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务，锁/">事务，锁</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-为什么需要前后分离" class="post-为什么需要前后分离 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/03/12/为什么需要前后分离/">为什么需要前后分离</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/12/为什么需要前后分离/" data-id="cju0n5pkf001tjm19a9y6vi6x" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>前后端要不要分，怎么分，是由具体业务决定的。</p>
+<p>需要用户登录且不能由搜索引擎抓取，前后端分离是鼓励的。</p>
+<p>需要搜索引擎带流量的，必须由服务器端渲染。</p>
+<p>需要App和后端交互，必须分离。</p>
+<p>但是分了就表示架构合理？不一定。</p>
+<p>设计一套合理／可升级／客户端友好的API也不容易。</p>
+<p>要想分离好，前端开发要了解后端架构，后端开发要虚心学习JavaScript，双方如果互相鄙视，分了也白搭。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/12/为什么需要前后分离/">
+    <time datetime="2018-03-12T08:47:59.000Z" class="entry-date">
+        2018-03-12
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前后端分离/">前后端分离</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-String-incrementer" class="post-String-incrementer post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/27/String-incrementer/">String incrementer </a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/27/String-incrementer/" data-id="cju0n5pjx000xjm19s2w6dh1d" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incremented by 1. If the string does not end with a number the number 1 should be appended to the new string.</p>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h3><pre><code>foo -&gt; foo1
+
+foobar23 -&gt; foobar24
+
+foo0042 -&gt; foo0043
+
+foo9 -&gt; foo10
+
+foo099 -&gt; foo100
+</code></pre><p>Attention: If the number has leading zeros the amount of digits should be considered.</p>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increment_string</span><span class="params">(input)</span></span></span><br><span class="line">  <span class="comment">#your code here</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">"1"</span> <span class="keyword">if</span> input.empty?</span><br><span class="line">  arr = input.rpartition(<span class="regexp">/\D/</span>)</span><br><span class="line">  <span class="keyword">if</span> arr[-<span class="number">1</span>].empty?</span><br><span class="line">   arr[-<span class="number">1</span>] = <span class="string">"1"</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    arr[-<span class="number">1</span>] = arr[-<span class="number">1</span>].succ</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> arr.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increment_string</span><span class="params">(input)</span></span></span><br><span class="line">  input.sub(<span class="regexp">/\d*$/</span>) &#123; <span class="params">|n|</span> n.empty? ? <span class="number">1</span> : n.succ &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/27/String-incrementer/">
+    <time datetime="2018-02-27T09:41:37.000Z" class="entry-date">
+        2018-02-27
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-ruby中super和super-的区别" class="post-ruby中super和super-的区别 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/26/ruby中super和super-的区别/">ruby中super和super()的区别</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/26/ruby中super和super-的区别/" data-id="cju0n5pkc001ojm193duvjnsb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>我们经常要在子类的initialize方法中调用super和super()。<br>从语法上说super和super()是有微妙区别的。<br>&nbsp;&nbsp;&nbsp;&nbsp;super不带括号表示调用父类的同名函数，并将本函数的所有参数传入父类的同名函数；<br>&nbsp;&nbsp;&nbsp;&nbsp;super()带括号则表示调用父类的同名函数，但是不传入任何参数；</p>
+<p>演示代码如下：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SParent</span>  </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span> <span class="title">*</span><span class="title">args</span>  </span></span><br><span class="line">        args.each &#123;<span class="params">|arg|</span> puts arg&#125;  </span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SChild</span> &lt; SParent  </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span> <span class="title">a</span>, <span class="title">b</span>, <span class="title">c</span>  </span></span><br><span class="line">        <span class="keyword">super</span>  </span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">a, b, c = *<span class="string">%W[a b c]</span>  </span><br><span class="line">SChild.new a, b, c <span class="comment"># puts a, b, c if super  </span></span><br><span class="line">SChild.new a, b, c <span class="comment"># puts nothing if super()</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出当SChild的initialize中调用super()时，代码是不会打印任何信息的。这是因为super()没有向SParent的initialize方法传任何参数。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/26/ruby中super和super-的区别/">
+    <time datetime="2018-02-26T05:26:19.000Z" class="entry-date">
+        2018-02-26
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Ruby中include-extend的区别" class="post-Ruby中include-extend的区别 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/26/Ruby中include-extend的区别/">Ruby中include &amp; extend的区别</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/26/Ruby中include-extend的区别/" data-id="cju0n5pk20015jm1913wm8fhg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="require"><a href="#require" class="headerlink" title="require"></a>require</h3><pre><code>require方法是加载一个文件，只加载一次，如果多次加载会返回false，一般在使用require加载一个文件的时候不需要加扩展名。如要加载test.rb文件时，require ‘test’。
+</code></pre><h3 id="load"><a href="#load" class="headerlink" title="load"></a>load</h3><pre><code>load方法跟require方法类似，也是加载一个文件，但是也有不同，就是它可以多次加载，而且必须制定扩展名。如要加载文件test.rb文件时， load &quot;test.rb&quot;
+</code></pre><h3 id="include-amp-extend"><a href="#include-amp-extend" class="headerlink" title="include &amp; extend"></a>include &amp; extend</h3><p>先说include 和 extend，看下面的一段代码：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    puts <span class="string">"method in A"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line">  <span class="keyword">include</span> A</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line">  extend A</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>这样写之后，B将新增一个实例方法my_method，C将新增一个类方法my_method，同时，B的祖先链（ancestors）中将增加A，而C的祖先链中没有A。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/26/Ruby中include-extend的区别/">
+    <time datetime="2018-02-26T03:37:03.000Z" class="entry-date">
+        2018-02-26
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Sum-of-Digits-Digital-Root" class="post-Sum-of-Digits-Digital-Root post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/22/Sum-of-Digits-Digital-Root/">Sum of Digits / Digital Root</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/22/Sum-of-Digits-Digital-Root/" data-id="cju0n5pk00012jm19brynvrwu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>In this kata, you must create a digital root function.</p>
+<p>A digital root is the recursive sum of all the digits in a number. Given n, take the sum of the digits of n. If that value has two digits, continue reducing in this way until a single-digit number is produced. This is only applicable to the natural numbers.</p>
+<p>Here’s how it works (Ruby example given):</p>
+<pre><code>digital_root(16)
+  =&gt; 1 + 6
+  =&gt; 7
+
+digital_root(942)
+  =&gt; 9 + 4 + 2
+  =&gt; 15 ...
+  =&gt; 1 + 5
+  =&gt; 6
+
+digital_root(132189)
+  =&gt; 1 + 3 + 2 + 1 + 8 + 9
+  =&gt; 24 ...
+  =&gt; 2 + 4
+  =&gt; 6
+
+digital_root(493193)
+  =&gt; 4 + 9 + 3 + 1 + 9 + 3
+  =&gt; 29 ...
+  =&gt; 2 + 9
+  =&gt; 11 ...
+  =&gt; 1 + 1
+  =&gt; 2
+</code></pre><h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">digital_root</span><span class="params">(n)</span></span></span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line">  n = n.to_s.chars.map(&amp;<span class="symbol">:to_i</span>).reduce(<span class="symbol">:+</span>)</span><br><span class="line">  n &gt; <span class="number">9</span> ? digital_root(n) : n</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">digital_root</span><span class="params">(n)</span></span></span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line">  n &lt; <span class="number">10</span> ? n : digital_root(n / <span class="number">10</span> + n % <span class="number">10</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/22/Sum-of-Digits-Digital-Root/">
+    <time datetime="2018-02-22T05:43:51.000Z" class="entry-date">
+        2018-02-22
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-RGB-To-Hex-Conversion" class="post-RGB-To-Hex-Conversion post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/22/RGB-To-Hex-Conversion/">RGB To Hex Conversion</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/22/RGB-To-Hex-Conversion/" data-id="cju0n5pjj000bjm191tplvfcd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>The rgb() method is incomplete. Complete the method so that passing in RGB decimal values will result in a hexadecimal representation being returned. The valid decimal values for RGB are 0 - 255. Any (r,g,b) argument values that fall out of that range should be rounded to the closest valid value.</p>
+<p>The following are examples of expected output values:</p>
+<pre><code>rgb(255, 255, 255) # returns FFFFFF
+rgb(255, 255, 300) # returns FFFFFF
+rgb(0,0,0) # returns 000000
+rgb(148, 0, 211) # returns 9400D3
+</code></pre><h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  <span class="comment"># complete this function</span></span><br><span class="line">  rgb_list = [r,g,b].map &#123;<span class="params">|item|</span> </span><br><span class="line">    <span class="keyword">if</span> item &lt; <span class="number">0</span></span><br><span class="line">      <span class="number">0</span></span><br><span class="line">    <span class="keyword">elsif</span> item &gt;<span class="number">255</span></span><br><span class="line">      <span class="number">255</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      item</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  &#125;</span><br><span class="line">  rgb_list.inject(<span class="string">""</span>) &#123;<span class="params">|str,item|</span> str + item.to_s(<span class="number">16</span>).rjust(<span class="number">2</span>,<span class="string">"0"</span>)&#125;.swapcase</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  <span class="string">"%.2X%.2X%.2X"</span> % [r,g,b].map&#123;<span class="params">|i|</span> [[i,<span class="number">255</span>].min,<span class="number">0</span>].max&#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  [r, g, b].map <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    <span class="keyword">if</span> c &lt;= <span class="number">0</span> </span><br><span class="line">      <span class="string">"00"</span></span><br><span class="line">    <span class="keyword">elsif</span> c &gt; <span class="number">255</span></span><br><span class="line">      <span class="string">"FF"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      c.to_s(<span class="number">16</span>).upcase    </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span>.join(<span class="string">''</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  [r, g, b].map&#123; <span class="params">|n|</span> [<span class="number">0</span>, n, <span class="number">255</span>].sort[<span class="number">1</span>].to_s(<span class="number">16</span>).upcase.rjust(<span class="number">2</span>, <span class="string">"0"</span>)&#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  [r, g, b].map <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">    i = <span class="number">0</span> <span class="keyword">if</span> i &lt; <span class="number">0</span></span><br><span class="line">    i = <span class="number">255</span> <span class="keyword">if</span> i &gt; <span class="number">255</span></span><br><span class="line">    i.to_s(<span class="number">16</span>).rjust(<span class="number">2</span>, <span class="string">'0'</span>).upcase</span><br><span class="line">  <span class="keyword">end</span>.join</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/22/RGB-To-Hex-Conversion/">
+    <time datetime="2018-02-22T04:12:52.000Z" class="entry-date">
+        2018-02-22
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Maximum-subarray-sum" class="post-Maximum-subarray-sum post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/02/22/Maximum-subarray-sum/">Maximum subarray sum</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/02/22/Maximum-subarray-sum/" data-id="cju0n5pjg0008jm19f55juu72" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:</p>
+<pre><code>maxSequence [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+-- should be 6: [4, -1, 2, 1]
+</code></pre><p>Easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.</p>
+<p>Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.</p>
+<h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_sequence</span><span class="params">(arr)</span></span></span><br><span class="line">  <span class="comment">#your code here</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> arr.empty?</span><br><span class="line">  curr_sum,max_sum = <span class="number">0</span>,-<span class="number">10000</span></span><br><span class="line">  arr.each <span class="keyword">do</span> <span class="params">|item|</span></span><br><span class="line">    <span class="keyword">if</span> curr_sum &lt; <span class="number">0</span> </span><br><span class="line">      curr_sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    curr_sum = curr_sum + item</span><br><span class="line">    max_sum = curr_sum &gt; max_sum ? curr_sum : max_sum</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> max_sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_sequence</span><span class="params">(arr)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> (arr.length == <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  running_sum = <span class="number">0</span>;</span><br><span class="line">  max_sum = arr[<span class="number">0</span>];</span><br><span class="line">  arr.each <span class="keyword">do</span> <span class="params">|v|</span></span><br><span class="line">    running_sum += v;</span><br><span class="line">    max_sum = running_sum <span class="keyword">if</span> (running_sum &gt; max_sum)</span><br><span class="line">    running_sum = <span class="number">0</span> <span class="keyword">if</span> (running_sum &lt; <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> max_sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_sequence</span><span class="params">(arr)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> arr.empty?</span><br><span class="line">  (<span class="number">1</span>..arr.size).flat_map &#123; <span class="params">|x|</span> arr.each_cons(x).to_a &#125;.max_by &#123; <span class="params">|x|</span> x.reduce(<span class="symbol">:+</span>) &#125;.reduce(<span class="symbol">:+</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/02/22/Maximum-subarray-sum/">
+    <time datetime="2018-02-22T03:02:10.000Z" class="entry-date">
+        2018-02-22
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewars/">codewars</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+  
+    <nav id="pagination">
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      </nav>
+    </nav>
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

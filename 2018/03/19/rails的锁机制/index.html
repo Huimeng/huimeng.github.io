@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="锁rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下：
+sku = User.find_by_id(sku_id)  
+Acti">
+  
+
+  
+  
+  
+  
+  
+  
+  <title>rails的锁机制 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="锁rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下： sku = User.find_by_id(sku_id)   ActiveRecord::Base.transaction do     if(sku.stock &amp;gt">
+<meta name="keywords" content="rails,锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rails的锁机制">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/rails的锁机制/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="锁rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下： sku = User.find_by_id(sku_id)   ActiveRecord::Base.transaction do     if(sku.stock &amp;gt">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-19T09:33:20.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rails的锁机制">
+<meta name="twitter:description" content="锁rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下： sku = User.find_by_id(sku_id)   ActiveRecord::Base.transaction do     if(sku.stock &amp;gt">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-rails的锁机制" class="post-rails的锁机制 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      rails的锁机制
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/19/rails的锁机制/" data-id="cju0n5pkb001mjm19bvmalapz" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update<br>一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下：</p>
+<pre><code class="ruby">sku = User.find_by_id(sku_id)  
+ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  <span class="keyword">if</span>(sku.stock &gt; <span class="number">0</span>)  
+    sku.update_attributes!(<span class="symbol">stock:</span> sku.stock - <span class="number">1</span>)  
+    Order.create!(order_attrs)  
+  <span class="keyword">end</span>              
+<span class="keyword">end</span>
+</code></pre>
+<p>在高并发的情况下，会出现这个问题，多个并发都同时执行到并满足第三行代码的条件，if条件下的语句都会执行，就会出现超卖的问题，那么怎么做不会超卖呢？就是加锁。</p>
+<pre><code class="ruby">sku = User.find_by_id(sku_id)  
+ActiveRecord::Base.transaction <span class="keyword">do</span>  
+  sku.lock!  
+  <span class="keyword">if</span>(sku.stock &gt; <span class="number">0</span>)  
+    sku.update_attributes!(<span class="symbol">stock:</span> sku.stock - <span class="number">1</span>)  
+    Order.create!(order_attrs)  
+  <span class="keyword">end</span>              
+<span class="keyword">end</span>
+</code></pre>
+<p>这样就不会出现超卖的情况了，估计有人有疑问，这样不会仍然有超卖的情况吗，多个并发同时执行并满足第四行代码时，if条件下的语句也都会执行，NONO，不是这样的，lock语句会执行: select * from … where … for update，查出的数据是最新的数据，所以不会出现这个问题。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/19/rails的锁机制/">
+    <time datetime="2018-03-19T09:19:22.000Z" class="entry-date">
+        2018-03-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2018/03/19/Rails-中乐观锁与悲观锁的使用/" rel="prev"><span class="meta-nav">←</span> Rails 中乐观锁与悲观锁的使用</a></span>
+    
+    
+        <span class="nav-next"><a href="/2018/03/18/Rails的事务和锁part2/" rel="next">Rails的事务和锁part2 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

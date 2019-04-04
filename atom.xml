@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-04-03T03:37:27.242Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Wayne Liu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>An introduction to Ruby `*`Splat and double `**`Splat operators</title>
+    <link href="http://yoursite.com/2019/04/03/rubys-splat-and-double-splat-operators/"/>
+    <id>http://yoursite.com/2019/04/03/rubys-splat-and-double-splat-operators/</id>
+    <published>2019-04-03T03:16:34.000Z</published>
+    <updated>2019-04-03T03:37:27.242Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Single-Splat"><a href="#Single-Splat" class="headerlink" title="Single *Splat"></a>Single *Splat</h3><p>当你不指定方法有多少个参数是可以使用<code>*</code>去收集，下面是一个简单的例子<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unknown_amount</span><span class="params">(*args)</span></span></span><br><span class="line">  p args</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">unknown_amount(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># =&gt; [1,2,3]</span></span><br></pre></td></tr></table></figure></p><p>上面的例子吧所有的参数都传入到一个args的Array中，使用时通过下标获取</p><h3 id="Double-Splat"><a href="#Double-Splat" class="headerlink" title="Double **Splat"></a>Double **Splat</h3><p><code>**</code>的方法是与<code>*</code>相似 主要是用来收集hash结构的参数类型，例子如下:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doublesplat</span><span class="params">(**nums)</span></span></span><br><span class="line">  p **nums</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">doublesplat <span class="symbol">one:</span> <span class="number">1</span>, <span class="symbol">two:</span> <span class="number">2</span></span><br><span class="line"><span class="comment"># =&gt; &#123;:one=&gt;1, :two=&gt;2&#125;</span></span><br></pre></td></tr></table></figure></p><p>其他例子：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(a, *b, **c)</span></span></span><br><span class="line">  [a, b, c]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">&gt; foo <span class="number">10</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [], &#123;&#125;]</span><br><span class="line">&gt; foo <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [<span class="number">20</span>, <span class="number">30</span>], &#123;&#125;]</span><br><span class="line">&gt; foo <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="symbol">d:</span> <span class="number">40</span>, <span class="symbol">e:</span> <span class="number">50</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [<span class="number">20</span>, <span class="number">30</span>], &#123;<span class="symbol">:d=&gt;</span><span class="number">40</span>, <span class="symbol">:e=&gt;</span><span class="number">50</span>&#125;]</span><br><span class="line">&gt; foo <span class="number">10</span>, <span class="symbol">d:</span> <span class="number">40</span>, <span class="symbol">e:</span> <span class="number">50</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [], &#123;<span class="symbol">:d=&gt;</span><span class="number">40</span>, <span class="symbol">:e=&gt;</span><span class="number">50</span>&#125;]</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Single-Splat&quot;&gt;&lt;a href=&quot;#Single-Splat&quot; class=&quot;headerlink&quot; title=&quot;Single *Splat&quot;&gt;&lt;/a&gt;Single *Splat&lt;/h3&gt;&lt;p&gt;当你不指定方法有多少个参数是可以使用&lt;code&gt;*&lt;/c
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Use neo4j-rake_tasks create test environment</title>
+    <link href="http://yoursite.com/2019/03/21/use-neo4j-rake-tasks-create-test-environment/"/>
+    <id>http://yoursite.com/2019/03/21/use-neo4j-rake-tasks-create-test-environment/</id>
+    <published>2019-03-21T03:28:31.000Z</published>
+    <updated>2019-04-03T05:15:49.307Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="rails-neo4j测试环境"><a href="#rails-neo4j测试环境" class="headerlink" title="rails neo4j测试环境"></a>rails neo4j测试环境</h3><p>要运行测试，必须运行Neo4j服务器（理想情况下，服务器与不同端口上的开发数据库不同）。启动并运行测试数据库的一种快捷方法是使用内置的rake任务</p><h4 id="安装与配置环境"><a href="#安装与配置环境" class="headerlink" title="安装与配置环境"></a>安装与配置环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># install neo4j test version</span><br><span class="line">rake neo4j:install[community-latest,test]</span><br><span class="line"># or a specific version</span><br><span class="line">rake neo4j:install[community-3.4.1,test]</span><br></pre></td></tr></table></figure><p>在config/neo4j.yml 中配置url的端口, 与development的端口不相同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test:</span><br><span class="line">  type: http</span><br><span class="line">  url: http://localhost:7475</span><br></pre></td></tr></table></figure></p><h4 id="启动neo4j的测试环境"><a href="#启动neo4j的测试环境" class="headerlink" title="启动neo4j的测试环境"></a>启动neo4j的测试环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake neo4j:start[test]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;rails-neo4j测试环境&quot;&gt;&lt;a href=&quot;#rails-neo4j测试环境&quot; class=&quot;headerlink&quot; title=&quot;rails neo4j测试环境&quot;&gt;&lt;/a&gt;rails neo4j测试环境&lt;/h3&gt;&lt;p&gt;要运行测试，必须运行Neo4j服务器
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Use after_commit to replace after_create</title>
+    <link href="http://yoursite.com/2019/03/21/use-after-commit-to-replace-after-create/"/>
+    <id>http://yoursite.com/2019/03/21/use-after-commit-to-replace-after-create/</id>
+    <published>2019-03-21T03:25:48.000Z</published>
+    <updated>2019-04-03T03:49:32.657Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Ruby 2.5 added Hash#slice method</title>
+    <link href="http://yoursite.com/2019/01/21/Ruby-2-5-added-Hash-slice-method/"/>
+    <id>http://yoursite.com/2019/01/21/Ruby-2-5-added-Hash-slice-method/</id>
+    <published>2019-01-21T08:15:10.000Z</published>
+    <updated>2019-01-21T08:47:45.717Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Ruby-2-4"><a href="#Ruby-2-4" class="headerlink" title="Ruby 2.4"></a>Ruby 2.4</h3><p>Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys name and description.</p><p>We can use <a href="https://ruby-doc.org/core-2.4.2/Hash.html#method-i-select" target="_blank" rel="noopener">Hash#select</a> method.</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">irb&gt; blog = &#123; <span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">name:</span> <span class="string">'Ruby 2.5'</span>, <span class="symbol">description:</span> <span class="string">'BigBinary Blog'</span> &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:id=&gt;</span><span class="number">1</span>, <span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">irb&gt; blog.select &#123; <span class="params">|key, value|</span> [<span class="symbol">:name</span>, <span class="symbol">:description</span>].<span class="keyword">include</span>?(key) &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br></pre></td></tr></table></figure><p><a href="https://bugs.ruby-lang.org/users/5184" target="_blank" rel="noopener">Matzbara Masanao</a> proposed a simple method to take care of this.</p><p>Some of the names proposed were choice and pick.</p><p><a href="https://twitter.com/yukihiro_matz" target="_blank" rel="noopener">Matz</a> suggested the name slice since this method is ActiveSupport compatible.</p><p>Ruby 2.5.0</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">irb&gt; blog = &#123; <span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">name:</span> <span class="string">'Ruby 2.5'</span>, <span class="symbol">description:</span> <span class="string">'BigBinary Blog'</span> &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:id=&gt;</span><span class="number">1</span>, <span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">irb&gt; blog.slice(<span class="symbol">:name</span>, <span class="symbol">:description</span>)</span><br><span class="line">  =&gt; &#123;<span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line">As we can see, now we can use a simple method slice to select key value pairs from a hash with specified keys.</span><br></pre></td></tr></table></figure><p>Here is relevant <a href="https://github.com/ruby/ruby/commit/6c50bdda0b" target="_blank" rel="noopener">commit</a> and <a href="https://bugs.ruby-lang.org/issues/13563" target="_blank" rel="noopener">discussion</a>.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Ruby-2-4&quot;&gt;&lt;a href=&quot;#Ruby-2-4&quot; class=&quot;headerlink&quot; title=&quot;Ruby 2.4&quot;&gt;&lt;/a&gt;Ruby 2.4&lt;/h3&gt;&lt;p&gt;Let’s say that we have a hash { id: 1, name: ‘
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Lonely Operator传说中的单身狗运算符</title>
+    <link href="http://yoursite.com/2019/01/21/Lonely-Operator%E4%BC%A0%E8%AF%B4%E4%B8%AD%E7%9A%84%E5%8D%95%E8%BA%AB%E7%8B%97%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>http://yoursite.com/2019/01/21/Lonely-Operator传说中的单身狗运算符/</id>
+    <published>2019-01-21T07:06:53.000Z</published>
+    <updated>2019-01-21T07:08:57.982Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="单身狗运算符"><a href="#单身狗运算符" class="headerlink" title="单身狗运算符"></a>单身狗运算符</h3><p>As of Ruby 2.3.0 there is a new operator known as the Safe Navigation Operator, or the Lonely Operator.  According to Matz it “looks like someone sitting on the floor, looking at the dot.”  What this operator allows you to do is continue chaining methods even if one of the items along the way returns nil.  It will safely return nil if that is the case.</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@a&amp;.size</span><br><span class="line"><span class="comment"># =&gt; nil</span></span><br><span class="line"> </span><br><span class="line">@a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"> </span><br><span class="line">@a&amp;.size</span><br><span class="line"><span class="comment"># =&gt; 3</span></span><br></pre></td></tr></table></figure><p>Notice we didn’t get a NoMethodError.  This will save a lot of the uses of the Rails try method.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;单身狗运算符&quot;&gt;&lt;a href=&quot;#单身狗运算符&quot; class=&quot;headerlink&quot; title=&quot;单身狗运算符&quot;&gt;&lt;/a&gt;单身狗运算符&lt;/h3&gt;&lt;p&gt;As of Ruby 2.3.0 there is a new operator known as the 
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>how to accessed top level scope</title>
+    <link href="http://yoursite.com/2019/01/21/how-to-accessed-top-level-scope/"/>
+    <id>http://yoursite.com/2019/01/21/how-to-accessed-top-level-scope/</id>
+    <published>2019-01-21T06:38:44.000Z</published>
+    <updated>2019-01-21T06:39:44.310Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Top-level-scope-objects-can-be-accessed-with-“-”"><a href="#Top-level-scope-objects-can-be-accessed-with-“-”" class="headerlink" title="Top level scope objects can be accessed with “::”"></a>Top level scope objects can be accessed with “::”</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">test</span></span></span><br><span class="line">    <span class="string">"FOO"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Thing</span></span></span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">test</span></span></span><br><span class="line">      <span class="string">"BAR"</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">Thing</span>.<span class="title">inner</span></span></span><br><span class="line">    A.test</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">Thing</span>.<span class="title">outer</span></span></span><br><span class="line">    <span class="symbol">:</span><span class="symbol">:A</span>.test</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">Thing.outer</span><br><span class="line"><span class="comment"># =&gt; "FOO"</span></span><br><span class="line">Thing.inner</span><br><span class="line"><span class="comment"># =&gt; "BAR"</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Top-level-scope-objects-can-be-accessed-with-“-”&quot;&gt;&lt;a href=&quot;#Top-level-scope-objects-can-be-accessed-with-“-”&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Rails Set Access Origin</title>
+    <link href="http://yoursite.com/2019/01/15/Rails-Set-Access-Origin/"/>
+    <id>http://yoursite.com/2019/01/15/Rails-Set-Access-Origin/</id>
+    <published>2019-01-15T01:39:01.000Z</published>
+    <updated>2019-01-15T09:38:04.770Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Rails-Api跨域设置Allow-Origin"><a href="#Rails-Api跨域设置Allow-Origin" class="headerlink" title="Rails Api跨域设置Allow Origin"></a>Rails Api跨域设置Allow Origin</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'rack-cors'</span>, <span class="symbol">:require</span> =&gt; <span class="string">'rack/cors'</span></span><br><span class="line"></span><br><span class="line">config.middleware.insert_before <span class="number">0</span>, Rack::Cors <span class="keyword">do</span></span><br><span class="line">  allow <span class="keyword">do</span></span><br><span class="line">    origins <span class="string">'*'</span></span><br><span class="line">    resource <span class="string">'*'</span>, <span class="symbol">:headers</span> =&gt; <span class="symbol">:any</span>, <span class="symbol">:methods</span> =&gt; [<span class="symbol">:get</span>, <span class="symbol">:post</span>, <span class="symbol">:options</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Rails-Api跨域设置Allow-Origin&quot;&gt;&lt;a href=&quot;#Rails-Api跨域设置Allow-Origin&quot; class=&quot;headerlink&quot; title=&quot;Rails Api跨域设置Allow Origin&quot;&gt;&lt;/a&gt;Rails Api跨域
+      
+    
+    </summary>
+    
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rails + Neo4j + GraphQL【转载】</title>
+    <link href="http://yoursite.com/2018/05/20/Rails-Neo4j-GraphQL/"/>
+    <id>http://yoursite.com/2018/05/20/Rails-Neo4j-GraphQL/</id>
+    <published>2018-05-20T02:05:16.000Z</published>
+    <updated>2018-06-16T11:05:20.724Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="想要做什么"><a href="#想要做什么" class="headerlink" title="想要做什么"></a>想要做什么</h3><p>使用GraphQL为存储在图形类型数据库提供API。</p><h3 id="什么是Neo4j"><a href="#什么是Neo4j" class="headerlink" title="什么是Neo4j"></a>什么是Neo4j</h3><p>Neo4j是NoSQL图形类型数据库的一种类型。<br>顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。<br><img src="/img/neo4j-graphql/neo4j-example.png" alt=""><br>在这个例子中, 绿色节点是Person, 红色节点是Movie。<br>写在箭头中的ACTED_IN和DIRECTED是节点之间的关系。</p><h3 id="什么是GraphQL"><a href="#什么是GraphQL" class="headerlink" title="什么是GraphQL"></a>什么是GraphQL</h3><p>GraphQL是一种API，它可以通过类似于JSON的格式的查询集中收集嵌套数据。<br>查询和响应的例子就是这样。</p><pre><code>curl  - XPOST  -  d&apos;  query = {users（name：&quot;taro&quot;）{name followers（）{name}}}&apos; localhost：3101/graphql</code></pre><p>返回数据</p><pre><code>{  &quot;data&quot;: {    &quot;users&quot;: {      &quot;name&quot;: &quot;张三&quot;,      &quot;followers&quot;: [        {&quot;name&quot;: &quot;李四&quot;},        {&quot;name&quot;: &quot;王五&quot;}      ]    }  }}</code></pre><h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><p>我将编写这个程序，从这里实际使用Rails中的Neo 4 j和GraphQL。<br>测试数据使用<br>使用faker生成随机数据（原文使用Twitter的follow数据 ）</p><h3 id="安装Neo4j"><a href="#安装Neo4j" class="headerlink" title="安装Neo4j"></a>安装Neo4j</h3><p>在Mac系统中, Neo4j很容易进行安装。<br>注）主要先安装Java环境 并设置$JAVA_HOME</p><pre><code>＃安装 neo4j brew install neo4j＃启动 Neo4j neo4j start</code></pre><p>启动后，在浏览器中打开<a href="http://localhost:7474" target="_blank" rel="noopener">http://localhost:7474</a> 将打开Web界面。<br>里面有很多材料，介绍了如何使用Neo4j。<br>例如下图中的示例图将是一个很好的练习。<br><img src="/img/neo4j-graphql/neo4j-example-graphs.png" width="400"> </p><h3 id="创建项目-并使用seed生成数据"><a href="#创建项目-并使用seed生成数据" class="headerlink" title="创建项目 并使用seed生成数据"></a>创建项目 并使用seed生成数据</h3><pre><code># 新建项目rails new graphql-neo4j-demo</code></pre><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开Gemfile文件 添加相关gem</span></span><br><span class="line">gem <span class="string">'neo4j'</span> <span class="comment"># ruby neo4j数据库</span></span><br><span class="line">gem <span class="string">'graphql'</span> <span class="comment"># graphql api</span></span><br><span class="line">gem <span class="string">'graphql-batch'</span> </span><br><span class="line">gem <span class="string">'neo4j-rake_tasks'</span>, <span class="string">'~&gt; 0.7.18'</span> <span class="comment"># neo4j 的rake集成</span></span><br><span class="line"><span class="comment"># gem 'faker', '~&gt; 1.8', '&gt;= 1.8.7' # 生成假数据</span></span><br><span class="line">gem <span class="string">'ffaker'</span>, <span class="string">'~&gt; 2.9'</span> <span class="comment">#生成中文名</span></span><br><span class="line">group <span class="symbol">:development</span> <span class="keyword">do</span></span><br><span class="line">  gem <span class="string">'graphiql-rails'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><p>使用<code>bundle install</code>和<code>rails generate graphql:install</code>安装相关gem和graphql模块。</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/neo4j.yml</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">development:</span></span><br><span class="line">  <span class="symbol">type:</span> http</span><br><span class="line">  <span class="symbol">url:</span> <span class="symbol">http:</span>/<span class="regexp">/[username]:[password]@localhost:7474</span></span><br><span class="line"><span class="regexp">test:</span></span><br><span class="line"><span class="regexp">  type: http</span></span><br><span class="line"><span class="regexp">  url: http:/</span><span class="regexp">/[username]:[password]@localhost:7474</span></span><br></pre></td></tr></table></figure><pre><code>bundle exec rails g neo4j:model user user_id:integer screen_name:string name:stringbundle exec rails g neo4j:model followbundle exec rails neo4j:migrate</code></pre><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/user.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line">  <span class="keyword">include</span> Neo4j::ActiveNode</span><br><span class="line">  property <span class="symbol">:user_id</span>, <span class="symbol">type:</span> Integer</span><br><span class="line">  property <span class="symbol">:screen_name</span>, <span class="symbol">type:</span> String</span><br><span class="line">  property <span class="symbol">:name</span>, <span class="symbol">type:</span> String</span><br><span class="line">  has_many <span class="symbol">:in</span>, <span class="symbol">:followers</span>, <span class="symbol">model_class:</span> <span class="symbol">:User</span>, <span class="symbol">rel_class:</span> <span class="symbol">:Follow</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/follow.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Follow</span> </span></span><br><span class="line">  <span class="keyword">include</span> Neo4j::ActiveRel</span><br><span class="line">  from_class <span class="symbol">:User</span></span><br><span class="line">  to_class <span class="symbol">:User</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># db/seeds.rb</span></span><br><span class="line">nodes = []</span><br><span class="line"></span><br><span class="line"><span class="number">20</span>.times <span class="keyword">do</span></span><br><span class="line">  user_id = SecureRandom.uuid</span><br><span class="line">  node = User.create(</span><br><span class="line">    <span class="symbol">user_id:</span> user_id,</span><br><span class="line">    <span class="symbol">name:</span> FFaker::NameCN.name,</span><br><span class="line">    <span class="symbol">screen_name:</span> FFaker::Name.last_name</span><br><span class="line">  )</span><br><span class="line">  nodes &lt;&lt; node</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">follower_ids = []</span><br><span class="line"></span><br><span class="line"><span class="number">30</span>.times <span class="keyword">do</span></span><br><span class="line">  follower_group = nodes.sample(<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">unless</span> follower_ids.<span class="keyword">include</span>?(follower_group.map(&amp;<span class="symbol">:user_id</span>))</span><br><span class="line">    Follow.create(<span class="symbol">from_node:</span> follower_group[<span class="number">0</span>], <span class="symbol">to_node:</span> follower_group[<span class="number">1</span>])</span><br><span class="line">    puts <span class="string">"<span class="subst">#&#123;follower_group[<span class="number">0</span>][<span class="symbol">:screen_name</span>]&#125;</span> -&gt; <span class="subst">#&#123;follower_group[<span class="number">1</span>][<span class="symbol">:screen_name</span>]&#125;</span>"</span></span><br><span class="line">    follower_ids &lt;&lt; follower_group.map(&amp;<span class="symbol">:user_id</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><p>使用<code>bundle exec rails db:seed</code>,创建测试种子数据并添加到Neo4j。<br>浏览器打开<code>http://localhost：7474</code>, 请点击下图中的User。<br><img src="/img/neo4j-graphql/node-labels.png" width="400"><br>可以看见他们相互之间的关系如下图所示:<br><img src="/img/neo4j-graphql/user-follow-neo4j.png" alt=""></p><h3 id="GraphQL-API"><a href="#GraphQL-API" class="headerlink" title="GraphQL API"></a>GraphQL API</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/&#123;PROJECT_NAME&#125;_schema.rb</span></span><br><span class="line"></span><br><span class="line">&#123;PROJECT_NAME&#125;Schema = GraphQL::Schema.define <span class="keyword">do</span></span><br><span class="line">  mutation(Types::MutationType)</span><br><span class="line">  query(Types::QueryType)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/types/query_type.rb</span></span><br><span class="line"></span><br><span class="line">Types::QueryType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">"Query"</span></span><br><span class="line">  field <span class="symbol">:users</span>, types.String <span class="keyword">do</span></span><br><span class="line">    type Types::UserType</span><br><span class="line">    description <span class="string">'Twitter user'</span></span><br><span class="line">    argument <span class="symbol">:name</span>, types.String</span><br><span class="line">    resolve -&gt;(obj, args, ctx) &#123;</span><br><span class="line">      User.find_by(<span class="symbol">name:</span> args[<span class="string">'name'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/types/user_type.rb</span></span><br><span class="line"></span><br><span class="line">Types::UserType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">"User"</span></span><br><span class="line">  description <span class="string">"A Faker User"</span></span><br><span class="line">  field <span class="symbol">:user_id</span>, types.String</span><br><span class="line">  field <span class="symbol">:screen_name</span>, types.String</span><br><span class="line">  field <span class="symbol">:name</span>, types.String</span><br><span class="line">  field <span class="symbol">:uuid</span>, types.String</span><br><span class="line"></span><br><span class="line">  field <span class="symbol">:followers</span>, types[Types::UserType] <span class="keyword">do</span></span><br><span class="line">    argument <span class="symbol">:limit</span>, types.Int, <span class="symbol">default_value:</span> <span class="number">10</span></span><br><span class="line">    resolve -&gt;(user, args, ctx) &#123;</span><br><span class="line">      user.followers.limit(args[<span class="symbol">:size</span>])</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>启动项目 <code>rails s</code>, 打开浏览器输入<code>http://127.0.0.1:3000/graphiql</code><br>在左侧输入如下查询可以查找到follow过’梦盈祭’的用户。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  users(name: &quot;梦盈祭&quot;)&#123;</span><br><span class="line">    name</span><br><span class="line">    screen_name</span><br><span class="line">    user_id</span><br><span class="line">    uuid</span><br><span class="line">    followers()&#123;</span><br><span class="line">      name</span><br><span class="line">      screen_name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>查询结果如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"data"</span>: &#123;</span><br><span class="line">    <span class="attr">"users"</span>: &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"梦盈祭"</span>,</span><br><span class="line">      <span class="attr">"screen_name"</span>: <span class="string">"Kuphal"</span>,</span><br><span class="line">      <span class="attr">"user_id"</span>: <span class="string">"c758d246-ac87-468f-b252-5cc90d396480"</span>,</span><br><span class="line">      <span class="attr">"uuid"</span>: <span class="string">"58fd1b6e-d4d0-414c-b1d6-f5478336431f"</span>,</span><br><span class="line">      <span class="attr">"followers"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"秀德茹"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Dietrich"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"纯瑄雍"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Boyer"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"刚妹蒉"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Krajcik"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h3><p><a href="https://qiita.com/enkatsu/items/94ad000b76fd9cb89fb4" target="_blank" rel="noopener">https://qiita.com/enkatsu/items/94ad000b76fd9cb89fb4</a></p><h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="https://github.com/Huimeng/neo4j-graphql-demo" target="_blank" rel="noopener">https://github.com/Huimeng/neo4j-graphql-demo</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;想要做什么&quot;&gt;&lt;a href=&quot;#想要做什么&quot; class=&quot;headerlink&quot; title=&quot;想要做什么&quot;&gt;&lt;/a&gt;想要做什么&lt;/h3&gt;&lt;p&gt;使用GraphQL为存储在图形类型数据库提供API。&lt;/p&gt;
+&lt;h3 id=&quot;什么是Neo4j&quot;&gt;&lt;a href=&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>rails 数据变化的监控</title>
+    <link href="http://yoursite.com/2018/03/27/rails-%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96%E7%9A%84%E7%9B%91%E6%8E%A7/"/>
+    <id>http://yoursite.com/2018/03/27/rails-数据变化的监控/</id>
+    <published>2018-03-27T05:32:44.000Z</published>
+    <updated>2018-03-27T05:35:41.930Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Dirty-objects"><a href="#Dirty-objects" class="headerlink" title="Dirty objects"></a>Dirty objects</h3><p>Dirty Objects功能可以追踪Model的属性是否有改变：</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">person = Person.find_by_name(<span class="string">'Uncle Bob'</span>)</span><br><span class="line">person.changed? <span class="comment"># =&gt; false 没有改变任何值</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 让我们来改一些值</span></span><br><span class="line">person.name = <span class="string">'Bob'</span></span><br><span class="line">person.changed? <span class="comment"># =&gt; true 有改变</span></span><br><span class="line">person.name_changed? <span class="comment"># =&gt; true 这个属性有改变</span></span><br><span class="line">person.name_was <span class="comment"># =&gt; 'Uncle Bob' 改变之前的值</span></span><br><span class="line">person.name_change <span class="comment"># =&gt; ['Uncle Bob', 'Bob']</span></span><br><span class="line">person.name = <span class="string">'Bill'</span></span><br><span class="line">person.name_change <span class="comment"># =&gt; ['Uncle Bob', 'Bill']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 储存进资料库</span></span><br><span class="line">person.save</span><br><span class="line">person.changed? <span class="comment"># =&gt; false</span></span><br><span class="line">person.name_changed? <span class="comment"># =&gt; false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 看看哪些属性改变了</span></span><br><span class="line">person.name = <span class="string">'Bob'</span></span><br><span class="line">person.changed <span class="comment"># =&gt; ['name']</span></span><br><span class="line">person.changes <span class="comment"># =&gt; &#123; 'name' =&gt; ['Bill', 'Bob'] &#125;</span></span><br></pre></td></tr></table></figure><pre><code>注意到Model资料一旦储存进资料库，追踪记录就重算消失了。</code></pre><p>什么时候会用到这个功能呢?通常是在储存进资料库前的回呼、验证或Observer中，你想根据修改了什么来做些动作，这时候Dirty</p><p> Objects功能就派上用场了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Dirty-objects&quot;&gt;&lt;a href=&quot;#Dirty-objects&quot; class=&quot;headerlink&quot; title=&quot;Dirty objects&quot;&gt;&lt;/a&gt;Dirty objects&lt;/h3&gt;&lt;p&gt;Dirty Objects功能可以追踪Model的属
+      
+    
+    </summary>
+    
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rails 中乐观锁与悲观锁的使用</title>
+    <link href="http://yoursite.com/2018/03/19/Rails-%E4%B8%AD%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2018/03/19/Rails-中乐观锁与悲观锁的使用/</id>
+    <published>2018-03-19T10:04:00.000Z</published>
+    <updated>2018-03-20T01:52:52.889Z</updated>
+    
+    <content type="html"><![CDATA[<p>简介</p><p>本文主要讲我们日常开发中用到的两种锁：</p><p>悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；<br>乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果发现在这个过程中，数据发生了改变，那么直接拒绝此次事务提交。乐观锁适合在资源争用不激烈的时候使用。</p><h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>常用场景<br>一般对于资源的争用都可以使用悲观锁，比如电商系统中涉及到订单的部分，比如用户支付完成后可能会同时有多条支付成功的通知（做过支付的都知道一般有同步通知和异步通知），比如订单改价的同时可能用户正在支付等等，对于这种会对订单状态发生改变的操作，我们内部一般对这种操作都做加锁处理。</p><p>使用<br>rails 的 API 文档中有详细的说明：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># select * from accounts where id=1 for update</span></span><br><span class="line">Account.lock.find(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 注意，这种最终会导致一个行锁</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># select * from accounts where name = 'shugo' limit 1 for update</span></span><br><span class="line">Account.where(<span class="string">"name = 'shugo'"</span>).lock(<span class="literal">true</span>).first</span><br><span class="line"><span class="comment"># 注意，这里可不是行锁，这里会是一个表锁</span></span><br><span class="line"><span class="comment"># 注意上面的区别，mysql innodb 里面，对于 "select * from where xxx for update" 的情况，是会锁住整张表的，所以最好不要这样来用。Rails 也提供了一个很方便的方法 with_lock 来锁住单个记录，并且内嵌在事务之中。下面代码中的两段是等价的：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">account = Account.find(<span class="number">1</span>)</span><br><span class="line">Account.transaction <span class="keyword">do</span></span><br><span class="line">    account.lock!</span><br><span class="line">    account.balance -= <span class="number">100</span></span><br><span class="line">    account.save! </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 和下面是等价的</span></span><br><span class="line"></span><br><span class="line">account.with_lock <span class="keyword">do</span></span><br><span class="line">    account.balance -= <span class="number">100</span></span><br><span class="line">    account.save!</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>常用场景<br>悲观锁出错概率小，因为一旦获得锁，其他进程会堵塞，但是也导致速度会受影响，系统开销比较大，不利于并发。乐观锁适用于资源竞争不是那么多的地方，这样系统的开销较小，速度也比较快。</p><p>乐观锁本质上算是一个利用多版本管理来控制并发的技术，如果事务提交之后，数据库发现写入进程传入的版本号与目前数据库中的版本号不一致，说明有其他人已经修改过数据，不再允许本事务的提交。所以，使用乐观锁之前需要给数据库增加一列 :lock_version，Rails会自动识别这一列，像数据库提交数据的时候自动带上。另外，乐观锁是默认打开的，如果要关闭，需要配置一下。</p><p>使用<br>记得使用前添加 lock_version 的字段给相应的表，其他的就是自动的了，如果事务提交失败，那么 Rails 会抛一个 ActiveRecord::StaleObjectError 的异常。</p><p>比如，下面这段代码会进行重试：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">retry_times = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    @order.with_lock <span class="keyword">do</span></span><br><span class="line">        @order.set_paid!</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">rescue</span> ActiveRecord::StaleObjectError =&gt; e</span><br><span class="line">    retry_times -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> retry_times &gt; <span class="number">0</span></span><br><span class="line">        <span class="keyword">retry</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        raise e</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">rescue</span> =&gt; e</span><br><span class="line">    raise e</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p><p>需要注意的地方<br>一般，使用锁的时候和事务同时使用，所以 with_lock 是用的比较多的，而且尽量使用行锁而不是表锁。<br>另外，也注意异常的处理，需要使用那些会抛异常的方法；<br>对于乐观锁，还需要注意如果是前端操作频繁，那么还需要把 lock_version 写入到 form 表单中，否则起不到锁的作用，这里讲的很详细了</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://railscasts.com/episodes/59-optimistic-locking-revised" target="_blank" rel="noopener">http://railscasts.com/episodes/59-optimistic-locking-revised</a><br><a href="https://blog.engineyard.com/2011/a-guide-to-optimistic-locking" target="_blank" rel="noopener">https://blog.engineyard.com/2011/a-guide-to-optimistic-locking</a><br><a href="http://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html" target="_blank" rel="noopener">http://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html</a></p><h3 id="原帖"><a href="#原帖" class="headerlink" title="原帖"></a>原帖</h3><p><a href="https://ruby-china.org/topics/28963" target="_blank" rel="noopener">https://ruby-china.org/topics/28963</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;简介&lt;/p&gt;
+&lt;p&gt;本文主要讲我们日常开发中用到的两种锁：&lt;/p&gt;
+&lt;p&gt;悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；&lt;br&gt;乐观锁：乐观锁是在
+      
+    
+    </summary>
+    
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+      <category term="乐观锁" scheme="http://yoursite.com/tags/%E4%B9%90%E8%A7%82%E9%94%81/"/>
+    
+      <category term="悲观锁" scheme="http://yoursite.com/tags/%E6%82%B2%E8%A7%82%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rails的锁机制</title>
+    <link href="http://yoursite.com/2018/03/19/rails%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2018/03/19/rails的锁机制/</id>
+    <published>2018-03-19T09:19:22.000Z</published>
+    <updated>2018-03-19T09:33:20.685Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update<br>一般情况下，事务要和锁一起用，本文提到的订单超卖的问题就是未使用锁导致的，代码如下：</p><pre><code class="ruby">sku = User.find_by_id(sku_id)  ActiveRecord::Base.transaction <span class="keyword">do</span>    <span class="keyword">if</span>(sku.stock &gt; <span class="number">0</span>)      sku.update_attributes!(<span class="symbol">stock:</span> sku.stock - <span class="number">1</span>)      Order.create!(order_attrs)    <span class="keyword">end</span>              <span class="keyword">end</span></code></pre><p>在高并发的情况下，会出现这个问题，多个并发都同时执行到并满足第三行代码的条件，if条件下的语句都会执行，就会出现超卖的问题，那么怎么做不会超卖呢？就是加锁。</p><pre><code class="ruby">sku = User.find_by_id(sku_id)  ActiveRecord::Base.transaction <span class="keyword">do</span>    sku.lock!    <span class="keyword">if</span>(sku.stock &gt; <span class="number">0</span>)      sku.update_attributes!(<span class="symbol">stock:</span> sku.stock - <span class="number">1</span>)      Order.create!(order_attrs)    <span class="keyword">end</span>              <span class="keyword">end</span></code></pre><p>这样就不会出现超卖的情况了，估计有人有疑问，这样不会仍然有超卖的情况吗，多个并发同时执行并满足第四行代码时，if条件下的语句也都会执行，NONO，不是这样的，lock语句会执行: select * from … where … for update，查出的数据是最新的数据，所以不会出现这个问题。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;锁&quot;&gt;&lt;a href=&quot;#锁&quot; class=&quot;headerlink&quot; title=&quot;锁&quot;&gt;&lt;/a&gt;锁&lt;/h3&gt;&lt;p&gt;rails中的lock语句用的锁是我们常说的悲观锁，sql的语句一般是: select … from … where …for update&lt;br&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+      <category term="锁" scheme="http://yoursite.com/tags/%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rails的事务和锁part2</title>
+    <link href="http://yoursite.com/2018/03/18/Rails%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%94%81part2/"/>
+    <id>http://yoursite.com/2018/03/18/Rails的事务和锁part2/</id>
+    <published>2018-03-18T08:01:06.000Z</published>
+    <updated>2018-03-19T09:18:09.340Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="触发事务回滚"><a href="#触发事务回滚" class="headerlink" title="触发事务回滚"></a>触发事务回滚</h3><p>事务通过 rollback 过程把记录的状态进行重置。在 Rails 中，rollback 只会被一个 exception 触发。这是非常关键的一点，很多事务块中的代码不会触发异常，因此即使出错，事务也不会回滚。比如下面的写法：</p><pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>    david.update_attribute(<span class="symbol">:amount</span>, david.amount -<span class="number">100</span>)    mary.update_attribute(<span class="symbol">:amount</span>, <span class="number">100</span>)  <span class="keyword">end</span></code></pre><p>因为 Rails 中，#update_attribute 方法在调用失败的时候也不会触发 exception，它只是简单的返回 false ，因此必须确保 transaction 块中的函数在失败时会抛异常。正确的写法是这样的：</p><pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>    david.update_attributes!(<span class="symbol">:amount</span> =&gt; -<span class="number">100</span>)    mary.update_attributes!(<span class="symbol">:amount</span> =&gt; <span class="number">100</span>)  <span class="keyword">end</span></code></pre><p>这里值得一提的是，Rails 中约定，带有叹号的函数一般会在失败时抛异常，所以我们自己写带有!号的方法也一定要在失败时raise一个异常，这样才符合rails的规范。<br>同时，我也看到一些代码中，在事务块中使用了 #find_by 方法，实际上，find_by 等魔术方法当找不到记录的时候会返回 nil，而 #find 方法在找不到记录的时候会抛出一个ActiveRecord::RecordNotFound 异常。比如下面的例子：</p><pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>    david = User.find_by_name(<span class="string">"david"</span>)    <span class="keyword">if</span>(david.id != john.id)      john.update_attributes!(<span class="symbol">:amount</span> =&gt; -<span class="number">100</span>)      mary.update_attributes!(<span class="symbol">:amount</span> =&gt; <span class="number">100</span>)    <span class="keyword">end</span>  <span class="keyword">end</span></code></pre><p>发现上面的逻辑错误了吗？nil 对象也有一个 id 方法，导致记录没有被找到的错误被隐藏了。同时，由于 find_by 也不会抛出异常，因此下面的代码被错误的执行了。这就意味着，有的时候在某些场景下，我们需要人工抛异常。因此这段代码因此改成下面的形式:<br>当错误出现时，事务本身会回滚，同时异常也会在外层抛出。因此，你的调用方必须考虑 catch 这个异常，并进行相应的处理。</p><pre><code class="ruby">ActiveRecord::Base.transaction <span class="keyword">do</span>    david = User.find_by_name(<span class="string">"david"</span>)    raise ActiveRecord::RecordNotFound <span class="keyword">if</span> david.<span class="literal">nil</span>?    <span class="keyword">if</span>(david.id != john.id)      john.update_attributes!(<span class="symbol">:amount</span> =&gt; -<span class="number">100</span>)      mary.update_attributes!(<span class="symbol">:amount</span> =&gt; <span class="number">100</span>)    <span class="keyword">end</span>  <span class="keyword">end</span></code></pre><p>有一个特殊的异常，ActiveRecord::Rollback，当它被抛出时，事务本身会回滚，但是它并不会被重新抛出，因此你也不需要在外部进行 catch 和处理。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;触发事务回滚&quot;&gt;&lt;a href=&quot;#触发事务回滚&quot; class=&quot;headerlink&quot; title=&quot;触发事务回滚&quot;&gt;&lt;/a&gt;触发事务回滚&lt;/h3&gt;&lt;p&gt;事务通过 rollback 过程把记录的状态进行重置。在 Rails 中，rollback 只会被一个 ex
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+      <category term="事务，锁" scheme="http://yoursite.com/tags/%E4%BA%8B%E5%8A%A1%EF%BC%8C%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rails的事务和锁part1</title>
+    <link href="http://yoursite.com/2018/03/17/Rails%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%94%81part1/"/>
+    <id>http://yoursite.com/2018/03/17/Rails的事务和锁part1/</id>
+    <published>2018-03-17T07:00:30.000Z</published>
+    <updated>2018-03-19T09:18:06.317Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="为什么要使用事务"><a href="#为什么要使用事务" class="headerlink" title="为什么要使用事务"></a>为什么要使用事务</h3><p>事务是指并发控制的单位，是用户定义的一个操作序列。简单的来说事务里面的多个操作，要么都不执行，要么一起执行。事务可以帮助开发者保证应用中的数据一致性。常见的使用事务的场景是银行转账，钱从一个账户转移到另外一个账户。如果中间的某一步出错，那么整个过程应该重置（Rollback）。<br>举个银行的例子(伪代码)：</p><p>举个银行的例子(伪代码)：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ActiveRecord::Base.transaction <span class="keyword">do</span>  </span><br><span class="line">  david.withdrawal(<span class="number">100</span>)  </span><br><span class="line">  mary.deposit(<span class="number">100</span>)  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p><p>Rails中，通过ActiveRecord对象的类方法或者实例方法即可实现事务：</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Client.transaction <span class="keyword">do</span>  </span><br><span class="line">  @client.users.create!  </span><br><span class="line">  @user.clients(<span class="literal">true</span>).first.destroy!  </span><br><span class="line">  Product.first.destroy!  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">  </span><br><span class="line">@client.transaction <span class="keyword">do</span>  </span><br><span class="line">  @client.users.create!  </span><br><span class="line">  @user.clients(<span class="literal">true</span>).first.destroy!  </span><br><span class="line">  Product.first.destroy!  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><p>可以看到上面的例子中，每个事务中均含有多个不同的 model 。在同一个事务中调用多个 model 对象是常见的行为，因为事务是和一个数据库连接绑定在一起的，而不是某个 model 对象；而同时，也只有在对多个纪录进行操作，并且希望这些操作作为一个整体的时候，事务才是必要的。<br>另外，Rails 已经把类似 #save 和 #destroy 的方法包含在一个事务中了，因此，对于单条数据库记录来说，不需要再使用显式的调用了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;为什么要使用事务&quot;&gt;&lt;a href=&quot;#为什么要使用事务&quot; class=&quot;headerlink&quot; title=&quot;为什么要使用事务&quot;&gt;&lt;/a&gt;为什么要使用事务&lt;/h3&gt;&lt;p&gt;事务是指并发控制的单位，是用户定义的一个操作序列。简单的来说事务里面的多个操作，要么都不执行
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+      <category term="事务，锁" scheme="http://yoursite.com/tags/%E4%BA%8B%E5%8A%A1%EF%BC%8C%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么需要前后分离</title>
+    <link href="http://yoursite.com/2018/03/12/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%89%8D%E5%90%8E%E5%88%86%E7%A6%BB/"/>
+    <id>http://yoursite.com/2018/03/12/为什么需要前后分离/</id>
+    <published>2018-03-12T08:47:59.000Z</published>
+    <updated>2018-03-19T09:15:46.925Z</updated>
+    
+    <content type="html"><![CDATA[<p>前后端要不要分，怎么分，是由具体业务决定的。</p><p>需要用户登录且不能由搜索引擎抓取，前后端分离是鼓励的。</p><p>需要搜索引擎带流量的，必须由服务器端渲染。</p><p>需要App和后端交互，必须分离。</p><p>但是分了就表示架构合理？不一定。</p><p>设计一套合理／可升级／客户端友好的API也不容易。</p><p>要想分离好，前端开发要了解后端架构，后端开发要虚心学习JavaScript，双方如果互相鄙视，分了也白搭。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前后端要不要分，怎么分，是由具体业务决定的。&lt;/p&gt;
+&lt;p&gt;需要用户登录且不能由搜索引擎抓取，前后端分离是鼓励的。&lt;/p&gt;
+&lt;p&gt;需要搜索引擎带流量的，必须由服务器端渲染。&lt;/p&gt;
+&lt;p&gt;需要App和后端交互，必须分离。&lt;/p&gt;
+&lt;p&gt;但是分了就表示架构合理？不一定。&lt;/p
+      
+    
+    </summary>
+    
+    
+      <category term="web" scheme="http://yoursite.com/tags/web/"/>
+    
+      <category term="前后端分离" scheme="http://yoursite.com/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>String incrementer </title>
+    <link href="http://yoursite.com/2018/02/27/String-incrementer/"/>
+    <id>http://yoursite.com/2018/02/27/String-incrementer/</id>
+    <published>2018-02-27T09:41:37.000Z</published>
+    <updated>2018-03-19T07:15:57.539Z</updated>
+    
+    <content type="html"><![CDATA[<p>Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number should be incremented by 1. If the string does not end with a number the number 1 should be appended to the new string.</p><h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h3><pre><code>foo -&gt; foo1foobar23 -&gt; foobar24foo0042 -&gt; foo0043foo9 -&gt; foo10foo099 -&gt; foo100</code></pre><p>Attention: If the number has leading zeros the amount of digits should be considered.</p><h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increment_string</span><span class="params">(input)</span></span></span><br><span class="line">  <span class="comment">#your code here</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">"1"</span> <span class="keyword">if</span> input.empty?</span><br><span class="line">  arr = input.rpartition(<span class="regexp">/\D/</span>)</span><br><span class="line">  <span class="keyword">if</span> arr[-<span class="number">1</span>].empty?</span><br><span class="line">   arr[-<span class="number">1</span>] = <span class="string">"1"</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    arr[-<span class="number">1</span>] = arr[-<span class="number">1</span>].succ</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> arr.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increment_string</span><span class="params">(input)</span></span></span><br><span class="line">  input.sub(<span class="regexp">/\d*$/</span>) &#123; <span class="params">|n|</span> n.empty? ? <span class="number">1</span> : n.succ &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Your job is to write a function which increments a string, to create a new string. If the string already ends with a number, the number s
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="codewars" scheme="http://yoursite.com/tags/codewars/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ruby中super和super()的区别</title>
+    <link href="http://yoursite.com/2018/02/26/ruby%E4%B8%ADsuper%E5%92%8Csuper-%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2018/02/26/ruby中super和super-的区别/</id>
+    <published>2018-02-26T05:26:19.000Z</published>
+    <updated>2018-03-19T07:15:52.659Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们经常要在子类的initialize方法中调用super和super()。<br>从语法上说super和super()是有微妙区别的。<br>&nbsp;&nbsp;&nbsp;&nbsp;super不带括号表示调用父类的同名函数，并将本函数的所有参数传入父类的同名函数；<br>&nbsp;&nbsp;&nbsp;&nbsp;super()带括号则表示调用父类的同名函数，但是不传入任何参数；</p><p>演示代码如下：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SParent</span>  </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span> <span class="title">*</span><span class="title">args</span>  </span></span><br><span class="line">        args.each &#123;<span class="params">|arg|</span> puts arg&#125;  </span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SChild</span> &lt; SParent  </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span> <span class="title">a</span>, <span class="title">b</span>, <span class="title">c</span>  </span></span><br><span class="line">        <span class="keyword">super</span>  </span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">   </span><br><span class="line">a, b, c = *<span class="string">%W[a b c]</span>  </span><br><span class="line">SChild.new a, b, c <span class="comment"># puts a, b, c if super  </span></span><br><span class="line">SChild.new a, b, c <span class="comment"># puts nothing if super()</span></span><br></pre></td></tr></table></figure></p><p>可以看出当SChild的initialize中调用super()时，代码是不会打印任何信息的。这是因为super()没有向SParent的initialize方法传任何参数。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我们经常要在子类的initialize方法中调用super和super()。&lt;br&gt;从语法上说super和super()是有微妙区别的。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;super不带括号表示调用父类的同名函数，并将本函数的所有参数传入父类的同名函数；
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="codewars" scheme="http://yoursite.com/tags/codewars/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ruby中include &amp; extend的区别</title>
+    <link href="http://yoursite.com/2018/02/26/Ruby%E4%B8%ADinclude-extend%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2018/02/26/Ruby中include-extend的区别/</id>
+    <published>2018-02-26T03:37:03.000Z</published>
+    <updated>2018-03-19T07:14:46.188Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="require"><a href="#require" class="headerlink" title="require"></a>require</h3><pre><code>require方法是加载一个文件，只加载一次，如果多次加载会返回false，一般在使用require加载一个文件的时候不需要加扩展名。如要加载test.rb文件时，require ‘test’。</code></pre><h3 id="load"><a href="#load" class="headerlink" title="load"></a>load</h3><pre><code>load方法跟require方法类似，也是加载一个文件，但是也有不同，就是它可以多次加载，而且必须制定扩展名。如要加载文件test.rb文件时， load &quot;test.rb&quot;</code></pre><h3 id="include-amp-extend"><a href="#include-amp-extend" class="headerlink" title="include &amp; extend"></a>include &amp; extend</h3><p>先说include 和 extend，看下面的一段代码：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    puts <span class="string">"method in A"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line">  <span class="keyword">include</span> A</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line">  extend A</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p><p>这样写之后，B将新增一个实例方法my_method，C将新增一个类方法my_method，同时，B的祖先链（ancestors）中将增加A，而C的祖先链中没有A。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;require&quot;&gt;&lt;a href=&quot;#require&quot; class=&quot;headerlink&quot; title=&quot;require&quot;&gt;&lt;/a&gt;require&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;require方法是加载一个文件，只加载一次，如果多次加载会返回false，一般在使
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="codewars" scheme="http://yoursite.com/tags/codewars/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sum of Digits / Digital Root</title>
+    <link href="http://yoursite.com/2018/02/22/Sum-of-Digits-Digital-Root/"/>
+    <id>http://yoursite.com/2018/02/22/Sum-of-Digits-Digital-Root/</id>
+    <published>2018-02-22T05:43:51.000Z</published>
+    <updated>2018-03-19T07:16:05.691Z</updated>
+    
+    <content type="html"><![CDATA[<p>In this kata, you must create a digital root function.</p><p>A digital root is the recursive sum of all the digits in a number. Given n, take the sum of the digits of n. If that value has two digits, continue reducing in this way until a single-digit number is produced. This is only applicable to the natural numbers.</p><p>Here’s how it works (Ruby example given):</p><pre><code>digital_root(16)  =&gt; 1 + 6  =&gt; 7digital_root(942)  =&gt; 9 + 4 + 2  =&gt; 15 ...  =&gt; 1 + 5  =&gt; 6digital_root(132189)  =&gt; 1 + 3 + 2 + 1 + 8 + 9  =&gt; 24 ...  =&gt; 2 + 4  =&gt; 6digital_root(493193)  =&gt; 4 + 9 + 3 + 1 + 9 + 3  =&gt; 29 ...  =&gt; 2 + 9  =&gt; 11 ...  =&gt; 1 + 1  =&gt; 2</code></pre><h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">digital_root</span><span class="params">(n)</span></span></span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line">  n = n.to_s.chars.map(&amp;<span class="symbol">:to_i</span>).reduce(<span class="symbol">:+</span>)</span><br><span class="line">  n &gt; <span class="number">9</span> ? digital_root(n) : n</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">digital_root</span><span class="params">(n)</span></span></span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line">  n &lt; <span class="number">10</span> ? n : digital_root(n / <span class="number">10</span> + n % <span class="number">10</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;In this kata, you must create a digital root function.&lt;/p&gt;
+&lt;p&gt;A digital root is the recursive sum of all the digits in a number. Given n,
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="codewars" scheme="http://yoursite.com/tags/codewars/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RGB To Hex Conversion</title>
+    <link href="http://yoursite.com/2018/02/22/RGB-To-Hex-Conversion/"/>
+    <id>http://yoursite.com/2018/02/22/RGB-To-Hex-Conversion/</id>
+    <published>2018-02-22T04:12:52.000Z</published>
+    <updated>2018-03-19T07:14:19.675Z</updated>
+    
+    <content type="html"><![CDATA[<p>The rgb() method is incomplete. Complete the method so that passing in RGB decimal values will result in a hexadecimal representation being returned. The valid decimal values for RGB are 0 - 255. Any (r,g,b) argument values that fall out of that range should be rounded to the closest valid value.</p><p>The following are examples of expected output values:</p><pre><code>rgb(255, 255, 255) # returns FFFFFFrgb(255, 255, 300) # returns FFFFFFrgb(0,0,0) # returns 000000rgb(148, 0, 211) # returns 9400D3</code></pre><h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  <span class="comment"># complete this function</span></span><br><span class="line">  rgb_list = [r,g,b].map &#123;<span class="params">|item|</span> </span><br><span class="line">    <span class="keyword">if</span> item &lt; <span class="number">0</span></span><br><span class="line">      <span class="number">0</span></span><br><span class="line">    <span class="keyword">elsif</span> item &gt;<span class="number">255</span></span><br><span class="line">      <span class="number">255</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      item</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  &#125;</span><br><span class="line">  rgb_list.inject(<span class="string">""</span>) &#123;<span class="params">|str,item|</span> str + item.to_s(<span class="number">16</span>).rjust(<span class="number">2</span>,<span class="string">"0"</span>)&#125;.swapcase</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  <span class="string">"%.2X%.2X%.2X"</span> % [r,g,b].map&#123;<span class="params">|i|</span> [[i,<span class="number">255</span>].min,<span class="number">0</span>].max&#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  [r, g, b].map <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    <span class="keyword">if</span> c &lt;= <span class="number">0</span> </span><br><span class="line">      <span class="string">"00"</span></span><br><span class="line">    <span class="keyword">elsif</span> c &gt; <span class="number">255</span></span><br><span class="line">      <span class="string">"FF"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      c.to_s(<span class="number">16</span>).upcase    </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span>.join(<span class="string">''</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  [r, g, b].map&#123; <span class="params">|n|</span> [<span class="number">0</span>, n, <span class="number">255</span>].sort[<span class="number">1</span>].to_s(<span class="number">16</span>).upcase.rjust(<span class="number">2</span>, <span class="string">"0"</span>)&#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rgb</span><span class="params">(r, g, b)</span></span></span><br><span class="line">  [r, g, b].map <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">    i = <span class="number">0</span> <span class="keyword">if</span> i &lt; <span class="number">0</span></span><br><span class="line">    i = <span class="number">255</span> <span class="keyword">if</span> i &gt; <span class="number">255</span></span><br><span class="line">    i.to_s(<span class="number">16</span>).rjust(<span class="number">2</span>, <span class="string">'0'</span>).upcase</span><br><span class="line">  <span class="keyword">end</span>.join</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;The rgb() method is incomplete. Complete the method so that passing in RGB decimal values will result in a hexadecimal representation bei
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="codewars" scheme="http://yoursite.com/tags/codewars/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maximum subarray sum</title>
+    <link href="http://yoursite.com/2018/02/22/Maximum-subarray-sum/"/>
+    <id>http://yoursite.com/2018/02/22/Maximum-subarray-sum/</id>
+    <published>2018-02-22T03:02:10.000Z</published>
+    <updated>2018-03-19T07:13:32.293Z</updated>
+    
+    <content type="html"><![CDATA[<p>The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:</p><pre><code>maxSequence [-2, 1, -3, 4, -1, 2, 1, -5, 4]-- should be 6: [4, -1, 2, 1]</code></pre><p>Easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.</p><p>Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.</p><h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_sequence</span><span class="params">(arr)</span></span></span><br><span class="line">  <span class="comment">#your code here</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> arr.empty?</span><br><span class="line">  curr_sum,max_sum = <span class="number">0</span>,-<span class="number">10000</span></span><br><span class="line">  arr.each <span class="keyword">do</span> <span class="params">|item|</span></span><br><span class="line">    <span class="keyword">if</span> curr_sum &lt; <span class="number">0</span> </span><br><span class="line">      curr_sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    curr_sum = curr_sum + item</span><br><span class="line">    max_sum = curr_sum &gt; max_sum ? curr_sum : max_sum</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> max_sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_sequence</span><span class="params">(arr)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> (arr.length == <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  running_sum = <span class="number">0</span>;</span><br><span class="line">  max_sum = arr[<span class="number">0</span>];</span><br><span class="line">  arr.each <span class="keyword">do</span> <span class="params">|v|</span></span><br><span class="line">    running_sum += v;</span><br><span class="line">    max_sum = running_sum <span class="keyword">if</span> (running_sum &gt; max_sum)</span><br><span class="line">    running_sum = <span class="number">0</span> <span class="keyword">if</span> (running_sum &lt; <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> max_sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_sequence</span><span class="params">(arr)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> arr.empty?</span><br><span class="line">  (<span class="number">1</span>..arr.size).flat_map &#123; <span class="params">|x|</span> arr.each_cons(x).to_a &#125;.max_by &#123; <span class="params">|x|</span> x.reduce(<span class="symbol">:+</span>) &#125;.reduce(<span class="symbol">:+</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:&lt;/p&gt;
+&lt;pr
+      
+    
+    </summary>
+    
+    
+      <category term="ruby" scheme="http://yoursite.com/tags/ruby/"/>
+    
+      <category term="codewars" scheme="http://yoursite.com/tags/codewars/"/>
+    
+  </entry>
+  
+</feed>

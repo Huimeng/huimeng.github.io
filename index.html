@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-rubys-splat-and-double-splat-operators" class="post-rubys-splat-and-double-splat-operators post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/04/03/rubys-splat-and-double-splat-operators/" data-id="cju0n5pk4001ajm19wvixahe3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="Single-Splat"><a href="#Single-Splat" class="headerlink" title="Single *Splat"></a>Single *Splat</h3><p>当你不指定方法有多少个参数是可以使用<code>*</code>去收集，下面是一个简单的例子<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unknown_amount</span><span class="params">(*args)</span></span></span><br><span class="line">  p args</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">unknown_amount(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># =&gt; [1,2,3]</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的例子吧所有的参数都传入到一个args的Array中，使用时通过下标获取</p>
+<h3 id="Double-Splat"><a href="#Double-Splat" class="headerlink" title="Double **Splat"></a>Double **Splat</h3><p><code>**</code>的方法是与<code>*</code>相似 主要是用来收集hash结构的参数类型，例子如下:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doublesplat</span><span class="params">(**nums)</span></span></span><br><span class="line">  p **nums</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">doublesplat <span class="symbol">one:</span> <span class="number">1</span>, <span class="symbol">two:</span> <span class="number">2</span></span><br><span class="line"><span class="comment"># =&gt; &#123;:one=&gt;1, :two=&gt;2&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>其他例子：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(a, *b, **c)</span></span></span><br><span class="line">  [a, b, c]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">&gt; foo <span class="number">10</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [], &#123;&#125;]</span><br><span class="line">&gt; foo <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [<span class="number">20</span>, <span class="number">30</span>], &#123;&#125;]</span><br><span class="line">&gt; foo <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="symbol">d:</span> <span class="number">40</span>, <span class="symbol">e:</span> <span class="number">50</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [<span class="number">20</span>, <span class="number">30</span>], &#123;<span class="symbol">:d=&gt;</span><span class="number">40</span>, <span class="symbol">:e=&gt;</span><span class="number">50</span>&#125;]</span><br><span class="line">&gt; foo <span class="number">10</span>, <span class="symbol">d:</span> <span class="number">40</span>, <span class="symbol">e:</span> <span class="number">50</span></span><br><span class="line">=&gt; [<span class="number">10</span>, [], &#123;<span class="symbol">:d=&gt;</span><span class="number">40</span>, <span class="symbol">:e=&gt;</span><span class="number">50</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">
+    <time datetime="2019-04-03T03:16:34.000Z" class="entry-date">
+        2019-04-03
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-use-neo4j-rake-tasks-create-test-environment" class="post-use-neo4j-rake-tasks-create-test-environment post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/03/21/use-neo4j-rake-tasks-create-test-environment/" data-id="cju0n5pka001jjm19hju68cum" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="rails-neo4j测试环境"><a href="#rails-neo4j测试环境" class="headerlink" title="rails neo4j测试环境"></a>rails neo4j测试环境</h3><p>要运行测试，必须运行Neo4j服务器（理想情况下，服务器与不同端口上的开发数据库不同）。启动并运行测试数据库的一种快捷方法是使用内置的rake任务</p>
+<h4 id="安装与配置环境"><a href="#安装与配置环境" class="headerlink" title="安装与配置环境"></a>安装与配置环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># install neo4j test version</span><br><span class="line">rake neo4j:install[community-latest,test]</span><br><span class="line"># or a specific version</span><br><span class="line">rake neo4j:install[community-3.4.1,test]</span><br></pre></td></tr></table></figure>
+<p>在config/neo4j.yml 中配置url的端口, 与development的端口不相同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test:</span><br><span class="line">  type: http</span><br><span class="line">  url: http://localhost:7475</span><br></pre></td></tr></table></figure></p>
+<h4 id="启动neo4j的测试环境"><a href="#启动neo4j的测试环境" class="headerlink" title="启动neo4j的测试环境"></a>启动neo4j的测试环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake neo4j:start[test]</span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">
+    <time datetime="2019-03-21T03:28:31.000Z" class="entry-date">
+        2019-03-21
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-use-after-commit-to-replace-after-create" class="post-use-after-commit-to-replace-after-create post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/03/21/use-after-commit-to-replace-after-create/" data-id="cju0n5pk8001hjm19yqw16n31" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/03/21/use-after-commit-to-replace-after-create/">
+    <time datetime="2019-03-21T03:25:48.000Z" class="entry-date">
+        2019-03-21
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Ruby-2-5-added-Hash-slice-method" class="post-Ruby-2-5-added-Hash-slice-method post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/21/Ruby-2-5-added-Hash-slice-method/" data-id="cju0n5pjw000vjm19rty2ftfu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="Ruby-2-4"><a href="#Ruby-2-4" class="headerlink" title="Ruby 2.4"></a>Ruby 2.4</h3><p>Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys name and description.</p>
+<p>We can use <a href="https://ruby-doc.org/core-2.4.2/Hash.html#method-i-select" target="_blank" rel="noopener">Hash#select</a> method.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">irb&gt; blog = &#123; <span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">name:</span> <span class="string">'Ruby 2.5'</span>, <span class="symbol">description:</span> <span class="string">'BigBinary Blog'</span> &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:id=&gt;</span><span class="number">1</span>, <span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">irb&gt; blog.select &#123; <span class="params">|key, value|</span> [<span class="symbol">:name</span>, <span class="symbol">:description</span>].<span class="keyword">include</span>?(key) &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://bugs.ruby-lang.org/users/5184" target="_blank" rel="noopener">Matzbara Masanao</a> proposed a simple method to take care of this.</p>
+<p>Some of the names proposed were choice and pick.</p>
+<p><a href="https://twitter.com/yukihiro_matz" target="_blank" rel="noopener">Matz</a> suggested the name slice since this method is ActiveSupport compatible.</p>
+<p>Ruby 2.5.0</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">irb&gt; blog = &#123; <span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">name:</span> <span class="string">'Ruby 2.5'</span>, <span class="symbol">description:</span> <span class="string">'BigBinary Blog'</span> &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:id=&gt;</span><span class="number">1</span>, <span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">irb&gt; blog.slice(<span class="symbol">:name</span>, <span class="symbol">:description</span>)</span><br><span class="line">  =&gt; &#123;<span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line">As we can see, now we can use a simple method slice to select key value pairs from a hash with specified keys.</span><br></pre></td></tr></table></figure>
+<p>Here is relevant <a href="https://github.com/ruby/ruby/commit/6c50bdda0b" target="_blank" rel="noopener">commit</a> and <a href="https://bugs.ruby-lang.org/issues/13563" target="_blank" rel="noopener">discussion</a>.</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">
+    <time datetime="2019-01-21T08:15:10.000Z" class="entry-date">
+        2019-01-21
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Lonely-Operator传说中的单身狗运算符" class="post-Lonely-Operator传说中的单身狗运算符 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/21/Lonely-Operator传说中的单身狗运算符/" data-id="cju0n5pjd0005jm19srf7fyph" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="单身狗运算符"><a href="#单身狗运算符" class="headerlink" title="单身狗运算符"></a>单身狗运算符</h3><p>As of Ruby 2.3.0 there is a new operator known as the Safe Navigation Operator, or the Lonely Operator.  According to Matz it “looks like someone sitting on the floor, looking at the dot.”  What this operator allows you to do is continue chaining methods even if one of the items along the way returns nil.  It will safely return nil if that is the case.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@a&amp;.size</span><br><span class="line"><span class="comment"># =&gt; nil</span></span><br><span class="line"> </span><br><span class="line">@a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"> </span><br><span class="line">@a&amp;.size</span><br><span class="line"><span class="comment"># =&gt; 3</span></span><br></pre></td></tr></table></figure>
+<p>Notice we didn’t get a NoMethodError.  This will save a lot of the uses of the Rails try method.</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">
+    <time datetime="2019-01-21T07:06:53.000Z" class="entry-date">
+        2019-01-21
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-how-to-accessed-top-level-scope" class="post-how-to-accessed-top-level-scope post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/01/21/how-to-accessed-top-level-scope/">how to accessed top level scope</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/21/how-to-accessed-top-level-scope/" data-id="cju0n5pjz0010jm195hcfhf5w" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="Top-level-scope-objects-can-be-accessed-with-“-”"><a href="#Top-level-scope-objects-can-be-accessed-with-“-”" class="headerlink" title="Top level scope objects can be accessed with “::”"></a>Top level scope objects can be accessed with “::”</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">test</span></span></span><br><span class="line">    <span class="string">"FOO"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Thing</span></span></span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">test</span></span></span><br><span class="line">      <span class="string">"BAR"</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">Thing</span>.<span class="title">inner</span></span></span><br><span class="line">    A.test</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">Thing</span>.<span class="title">outer</span></span></span><br><span class="line">    <span class="symbol">:</span><span class="symbol">:A</span>.test</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">Thing.outer</span><br><span class="line"><span class="comment"># =&gt; "FOO"</span></span><br><span class="line">Thing.inner</span><br><span class="line"><span class="comment"># =&gt; "BAR"</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/21/how-to-accessed-top-level-scope/">
+    <time datetime="2019-01-21T06:38:44.000Z" class="entry-date">
+        2019-01-21
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Rails-Set-Access-Origin" class="post-Rails-Set-Access-Origin post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/01/15/Rails-Set-Access-Origin/">Rails Set Access Origin</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/15/Rails-Set-Access-Origin/" data-id="cju0n5pjn000gjm19zkoc4uty" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="Rails-Api跨域设置Allow-Origin"><a href="#Rails-Api跨域设置Allow-Origin" class="headerlink" title="Rails Api跨域设置Allow Origin"></a>Rails Api跨域设置Allow Origin</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'rack-cors'</span>, <span class="symbol">:require</span> =&gt; <span class="string">'rack/cors'</span></span><br><span class="line"></span><br><span class="line">config.middleware.insert_before <span class="number">0</span>, Rack::Cors <span class="keyword">do</span></span><br><span class="line">  allow <span class="keyword">do</span></span><br><span class="line">    origins <span class="string">'*'</span></span><br><span class="line">    resource <span class="string">'*'</span>, <span class="symbol">:headers</span> =&gt; <span class="symbol">:any</span>, <span class="symbol">:methods</span> =&gt; [<span class="symbol">:get</span>, <span class="symbol">:post</span>, <span class="symbol">:options</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/15/Rails-Set-Access-Origin/">
+    <time datetime="2019-01-15T01:39:01.000Z" class="entry-date">
+        2019-01-15
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Rails-Neo4j-GraphQL" class="post-Rails-Neo4j-GraphQL post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/05/20/Rails-Neo4j-GraphQL/">Rails + Neo4j + GraphQL【转载】</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/05/20/Rails-Neo4j-GraphQL/" data-id="cju0n5pjo000ijm196zli357v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="想要做什么"><a href="#想要做什么" class="headerlink" title="想要做什么"></a>想要做什么</h3><p>使用GraphQL为存储在图形类型数据库提供API。</p>
+<h3 id="什么是Neo4j"><a href="#什么是Neo4j" class="headerlink" title="什么是Neo4j"></a>什么是Neo4j</h3><p>Neo4j是NoSQL图形类型数据库的一种类型。<br>顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。<br><img src="/img/neo4j-graphql/neo4j-example.png" alt=""><br>在这个例子中, 绿色节点是Person, 红色节点是Movie。<br>写在箭头中的ACTED_IN和DIRECTED是节点之间的关系。</p>
+<h3 id="什么是GraphQL"><a href="#什么是GraphQL" class="headerlink" title="什么是GraphQL"></a>什么是GraphQL</h3><p>GraphQL是一种API，它可以通过类似于JSON的格式的查询集中收集嵌套数据。<br>查询和响应的例子就是这样。</p>
+<pre><code>curl  - XPOST  -  d&apos;  query = {users（name：&quot;taro&quot;）{name followers（）{name}}}&apos; localhost：3101/graphql
+</code></pre><p>返回数据</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;users&quot;: {
+      &quot;name&quot;: &quot;张三&quot;,
+      &quot;followers&quot;: [
+        {&quot;name&quot;: &quot;李四&quot;},
+        {&quot;name&quot;: &quot;王五&quot;}
+      ]
+    }
+  }
+}
+</code></pre><h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><p>我将编写这个程序，从这里实际使用Rails中的Neo 4 j和GraphQL。<br>测试数据使用<br>使用faker生成随机数据（原文使用Twitter的follow数据 ）</p>
+<h3 id="安装Neo4j"><a href="#安装Neo4j" class="headerlink" title="安装Neo4j"></a>安装Neo4j</h3><p>在Mac系统中, Neo4j很容易进行安装。<br>注）主要先安装Java环境 并设置$JAVA_HOME</p>
+<pre><code>＃安装 neo4j 
+brew install neo4j
+＃启动 Neo4j 
+neo4j start
+</code></pre><p>启动后，在浏览器中打开<a href="http://localhost:7474" target="_blank" rel="noopener">http://localhost:7474</a> 将打开Web界面。<br>里面有很多材料，介绍了如何使用Neo4j。<br>例如下图中的示例图将是一个很好的练习。<br><img src="/img/neo4j-graphql/neo4j-example-graphs.png" width="400"> </p>
+<h3 id="创建项目-并使用seed生成数据"><a href="#创建项目-并使用seed生成数据" class="headerlink" title="创建项目 并使用seed生成数据"></a>创建项目 并使用seed生成数据</h3><pre><code># 新建项目
+rails new graphql-neo4j-demo
+</code></pre><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开Gemfile文件 添加相关gem</span></span><br><span class="line">gem <span class="string">'neo4j'</span> <span class="comment"># ruby neo4j数据库</span></span><br><span class="line">gem <span class="string">'graphql'</span> <span class="comment"># graphql api</span></span><br><span class="line">gem <span class="string">'graphql-batch'</span> </span><br><span class="line">gem <span class="string">'neo4j-rake_tasks'</span>, <span class="string">'~&gt; 0.7.18'</span> <span class="comment"># neo4j 的rake集成</span></span><br><span class="line"><span class="comment"># gem 'faker', '~&gt; 1.8', '&gt;= 1.8.7' # 生成假数据</span></span><br><span class="line">gem <span class="string">'ffaker'</span>, <span class="string">'~&gt; 2.9'</span> <span class="comment">#生成中文名</span></span><br><span class="line">group <span class="symbol">:development</span> <span class="keyword">do</span></span><br><span class="line">  gem <span class="string">'graphiql-rails'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>bundle install</code>和<code>rails generate graphql:install</code>安装相关gem和graphql模块。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/neo4j.yml</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">development:</span></span><br><span class="line">  <span class="symbol">type:</span> http</span><br><span class="line">  <span class="symbol">url:</span> <span class="symbol">http:</span>/<span class="regexp">/[username]:[password]@localhost:7474</span></span><br><span class="line"><span class="regexp">test:</span></span><br><span class="line"><span class="regexp">  type: http</span></span><br><span class="line"><span class="regexp">  url: http:/</span><span class="regexp">/[username]:[password]@localhost:7474</span></span><br></pre></td></tr></table></figure>
+<pre><code>bundle exec rails g neo4j:model user user_id:integer screen_name:string name:string
+bundle exec rails g neo4j:model follow
+bundle exec rails neo4j:migrate
+</code></pre><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/user.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line">  <span class="keyword">include</span> Neo4j::ActiveNode</span><br><span class="line">  property <span class="symbol">:user_id</span>, <span class="symbol">type:</span> Integer</span><br><span class="line">  property <span class="symbol">:screen_name</span>, <span class="symbol">type:</span> String</span><br><span class="line">  property <span class="symbol">:name</span>, <span class="symbol">type:</span> String</span><br><span class="line">  has_many <span class="symbol">:in</span>, <span class="symbol">:followers</span>, <span class="symbol">model_class:</span> <span class="symbol">:User</span>, <span class="symbol">rel_class:</span> <span class="symbol">:Follow</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/follow.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Follow</span> </span></span><br><span class="line">  <span class="keyword">include</span> Neo4j::ActiveRel</span><br><span class="line">  from_class <span class="symbol">:User</span></span><br><span class="line">  to_class <span class="symbol">:User</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># db/seeds.rb</span></span><br><span class="line">nodes = []</span><br><span class="line"></span><br><span class="line"><span class="number">20</span>.times <span class="keyword">do</span></span><br><span class="line">  user_id = SecureRandom.uuid</span><br><span class="line">  node = User.create(</span><br><span class="line">    <span class="symbol">user_id:</span> user_id,</span><br><span class="line">    <span class="symbol">name:</span> FFaker::NameCN.name,</span><br><span class="line">    <span class="symbol">screen_name:</span> FFaker::Name.last_name</span><br><span class="line">  )</span><br><span class="line">  nodes &lt;&lt; node</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">follower_ids = []</span><br><span class="line"></span><br><span class="line"><span class="number">30</span>.times <span class="keyword">do</span></span><br><span class="line">  follower_group = nodes.sample(<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">unless</span> follower_ids.<span class="keyword">include</span>?(follower_group.map(&amp;<span class="symbol">:user_id</span>))</span><br><span class="line">    Follow.create(<span class="symbol">from_node:</span> follower_group[<span class="number">0</span>], <span class="symbol">to_node:</span> follower_group[<span class="number">1</span>])</span><br><span class="line">    puts <span class="string">"<span class="subst">#&#123;follower_group[<span class="number">0</span>][<span class="symbol">:screen_name</span>]&#125;</span> -&gt; <span class="subst">#&#123;follower_group[<span class="number">1</span>][<span class="symbol">:screen_name</span>]&#125;</span>"</span></span><br><span class="line">    follower_ids &lt;&lt; follower_group.map(&amp;<span class="symbol">:user_id</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>bundle exec rails db:seed</code>,创建测试种子数据并添加到Neo4j。<br>浏览器打开<code>http://localhost：7474</code>, 请点击下图中的User。<br><img src="/img/neo4j-graphql/node-labels.png" width="400"><br>可以看见他们相互之间的关系如下图所示:<br><img src="/img/neo4j-graphql/user-follow-neo4j.png" alt=""></p>
+<h3 id="GraphQL-API"><a href="#GraphQL-API" class="headerlink" title="GraphQL API"></a>GraphQL API</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/&#123;PROJECT_NAME&#125;_schema.rb</span></span><br><span class="line"></span><br><span class="line">&#123;PROJECT_NAME&#125;Schema = GraphQL::Schema.define <span class="keyword">do</span></span><br><span class="line">  mutation(Types::MutationType)</span><br><span class="line">  query(Types::QueryType)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/types/query_type.rb</span></span><br><span class="line"></span><br><span class="line">Types::QueryType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">"Query"</span></span><br><span class="line">  field <span class="symbol">:users</span>, types.String <span class="keyword">do</span></span><br><span class="line">    type Types::UserType</span><br><span class="line">    description <span class="string">'Twitter user'</span></span><br><span class="line">    argument <span class="symbol">:name</span>, types.String</span><br><span class="line">    resolve -&gt;(obj, args, ctx) &#123;</span><br><span class="line">      User.find_by(<span class="symbol">name:</span> args[<span class="string">'name'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/types/user_type.rb</span></span><br><span class="line"></span><br><span class="line">Types::UserType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">"User"</span></span><br><span class="line">  description <span class="string">"A Faker User"</span></span><br><span class="line">  field <span class="symbol">:user_id</span>, types.String</span><br><span class="line">  field <span class="symbol">:screen_name</span>, types.String</span><br><span class="line">  field <span class="symbol">:name</span>, types.String</span><br><span class="line">  field <span class="symbol">:uuid</span>, types.String</span><br><span class="line"></span><br><span class="line">  field <span class="symbol">:followers</span>, types[Types::UserType] <span class="keyword">do</span></span><br><span class="line">    argument <span class="symbol">:limit</span>, types.Int, <span class="symbol">default_value:</span> <span class="number">10</span></span><br><span class="line">    resolve -&gt;(user, args, ctx) &#123;</span><br><span class="line">      user.followers.limit(args[<span class="symbol">:size</span>])</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>启动项目 <code>rails s</code>, 打开浏览器输入<code>http://127.0.0.1:3000/graphiql</code><br>在左侧输入如下查询可以查找到follow过’梦盈祭’的用户。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  users(name: &quot;梦盈祭&quot;)&#123;</span><br><span class="line">    name</span><br><span class="line">    screen_name</span><br><span class="line">    user_id</span><br><span class="line">    uuid</span><br><span class="line">    followers()&#123;</span><br><span class="line">      name</span><br><span class="line">      screen_name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查询结果如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"data"</span>: &#123;</span><br><span class="line">    <span class="attr">"users"</span>: &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"梦盈祭"</span>,</span><br><span class="line">      <span class="attr">"screen_name"</span>: <span class="string">"Kuphal"</span>,</span><br><span class="line">      <span class="attr">"user_id"</span>: <span class="string">"c758d246-ac87-468f-b252-5cc90d396480"</span>,</span><br><span class="line">      <span class="attr">"uuid"</span>: <span class="string">"58fd1b6e-d4d0-414c-b1d6-f5478336431f"</span>,</span><br><span class="line">      <span class="attr">"followers"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"秀德茹"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Dietrich"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"纯瑄雍"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Boyer"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"刚妹蒉"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Krajcik"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h3><p><a href="https://qiita.com/enkatsu/items/94ad000b76fd9cb89fb4" target="_blank" rel="noopener">https://qiita.com/enkatsu/items/94ad000b76fd9cb89fb4</a></p>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="https://github.com/Huimeng/neo4j-graphql-demo" target="_blank" rel="noopener">https://github.com/Huimeng/neo4j-graphql-demo</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/05/20/Rails-Neo4j-GraphQL/">
+    <time datetime="2018-05-20T02:05:16.000Z" class="entry-date">
+        2018-05-20
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-rails-数据变化的监控" class="post-rails-数据变化的监控 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/03/27/rails-数据变化的监控/">rails 数据变化的监控</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/27/rails-数据变化的监控/" data-id="cju0n5pk6001fjm19b3fbrmav" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="Dirty-objects"><a href="#Dirty-objects" class="headerlink" title="Dirty objects"></a>Dirty objects</h3><p>Dirty Objects功能可以追踪Model的属性是否有改变：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">person = Person.find_by_name(<span class="string">'Uncle Bob'</span>)</span><br><span class="line">person.changed? <span class="comment"># =&gt; false 没有改变任何值</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 让我们来改一些值</span></span><br><span class="line">person.name = <span class="string">'Bob'</span></span><br><span class="line">person.changed? <span class="comment"># =&gt; true 有改变</span></span><br><span class="line">person.name_changed? <span class="comment"># =&gt; true 这个属性有改变</span></span><br><span class="line">person.name_was <span class="comment"># =&gt; 'Uncle Bob' 改变之前的值</span></span><br><span class="line">person.name_change <span class="comment"># =&gt; ['Uncle Bob', 'Bob']</span></span><br><span class="line">person.name = <span class="string">'Bill'</span></span><br><span class="line">person.name_change <span class="comment"># =&gt; ['Uncle Bob', 'Bill']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 储存进资料库</span></span><br><span class="line">person.save</span><br><span class="line">person.changed? <span class="comment"># =&gt; false</span></span><br><span class="line">person.name_changed? <span class="comment"># =&gt; false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 看看哪些属性改变了</span></span><br><span class="line">person.name = <span class="string">'Bob'</span></span><br><span class="line">person.changed <span class="comment"># =&gt; ['name']</span></span><br><span class="line">person.changes <span class="comment"># =&gt; &#123; 'name' =&gt; ['Bill', 'Bob'] &#125;</span></span><br></pre></td></tr></table></figure>
+<pre><code>注意到Model资料一旦储存进资料库，追踪记录就重算消失了。
+</code></pre><p>什么时候会用到这个功能呢?通常是在储存进资料库前的回呼、验证或Observer中，你想根据修改了什么来做些动作，这时候Dirty</p>
+<p> Objects功能就派上用场了。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/27/rails-数据变化的监控/">
+    <time datetime="2018-03-27T05:32:44.000Z" class="entry-date">
+        2018-03-27
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Rails-中乐观锁与悲观锁的使用" class="post-Rails-中乐观锁与悲观锁的使用 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/03/19/Rails-中乐观锁与悲观锁的使用/">Rails 中乐观锁与悲观锁的使用</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/03/19/Rails-中乐观锁与悲观锁的使用/" data-id="cju0n5pjs000njm19jki05j95" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>简介</p>
+<p>本文主要讲我们日常开发中用到的两种锁：</p>
+<p>悲观锁：悲观锁采用相对保守的策略，在资源争用比较严重的时候比较合适。悲观锁在事务开始之前就去尝试获得写权限，事务结束后释放锁；也就是说对于同一行记录，只有一个写事务可以并行；<br>乐观锁：乐观锁是在提交事务之前，大家可以各自修改数据，但是在提交事务的时候，如果发现在这个过程中，数据发生了改变，那么直接拒绝此次事务提交。乐观锁适合在资源争用不激烈的时候使用。</p>
+<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>常用场景<br>一般对于资源的争用都可以使用悲观锁，比如电商系统中涉及到订单的部分，比如用户支付完成后可能会同时有多条支付成功的通知（做过支付的都知道一般有同步通知和异步通知），比如订单改价的同时可能用户正在支付等等，对于这种会对订单状态发生改变的操作，我们内部一般对这种操作都做加锁处理。</p>
+<p>使用<br>rails 的 API 文档中有详细的说明：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># select * from accounts where id=1 for update</span></span><br><span class="line">Account.lock.find(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 注意，这种最终会导致一个行锁</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># select * from accounts where name = 'shugo' limit 1 for update</span></span><br><span class="line">Account.where(<span class="string">"name = 'shugo'"</span>).lock(<span class="literal">true</span>).first</span><br><span class="line"><span class="comment"># 注意，这里可不是行锁，这里会是一个表锁</span></span><br><span class="line"><span class="comment"># 注意上面的区别，mysql innodb 里面，对于 "select * from where xxx for update" 的情况，是会锁住整张表的，所以最好不要这样来用。Rails 也提供了一个很方便的方法 with_lock 来锁住单个记录，并且内嵌在事务之中。下面代码中的两段是等价的：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">account = Account.find(<span class="number">1</span>)</span><br><span class="line">Account.transaction <span class="keyword">do</span></span><br><span class="line">    account.lock!</span><br><span class="line">    account.balance -= <span class="number">100</span></span><br><span class="line">    account.save! </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 和下面是等价的</span></span><br><span class="line"></span><br><span class="line">account.with_lock <span class="keyword">do</span></span><br><span class="line">    account.balance -= <span class="number">100</span></span><br><span class="line">    account.save!</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>常用场景<br>悲观锁出错概率小，因为一旦获得锁，其他进程会堵塞，但是也导致速度会受影响，系统开销比较大，不利于并发。乐观锁适用于资源竞争不是那么多的地方，这样系统的开销较小，速度也比较快。</p>
+<p>乐观锁本质上算是一个利用多版本管理来控制并发的技术，如果事务提交之后，数据库发现写入进程传入的版本号与目前数据库中的版本号不一致，说明有其他人已经修改过数据，不再允许本事务的提交。所以，使用乐观锁之前需要给数据库增加一列 :lock_version，Rails会自动识别这一列，像数据库提交数据的时候自动带上。另外，乐观锁是默认打开的，如果要关闭，需要配置一下。</p>
+<p>使用<br>记得使用前添加 lock_version 的字段给相应的表，其他的就是自动的了，如果事务提交失败，那么 Rails 会抛一个 ActiveRecord::StaleObjectError 的异常。</p>
+<p>比如，下面这段代码会进行重试：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">retry_times = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    @order.with_lock <span class="keyword">do</span></span><br><span class="line">        @order.set_paid!</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">rescue</span> ActiveRecord::StaleObjectError =&gt; e</span><br><span class="line">    retry_times -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> retry_times &gt; <span class="number">0</span></span><br><span class="line">        <span class="keyword">retry</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        raise e</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">rescue</span> =&gt; e</span><br><span class="line">    raise e</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的地方<br>一般，使用锁的时候和事务同时使用，所以 with_lock 是用的比较多的，而且尽量使用行锁而不是表锁。<br>另外，也注意异常的处理，需要使用那些会抛异常的方法；<br>对于乐观锁，还需要注意如果是前端操作频繁，那么还需要把 lock_version 写入到 form 表单中，否则起不到锁的作用，这里讲的很详细了</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://railscasts.com/episodes/59-optimistic-locking-revised" target="_blank" rel="noopener">http://railscasts.com/episodes/59-optimistic-locking-revised</a><br><a href="https://blog.engineyard.com/2011/a-guide-to-optimistic-locking" target="_blank" rel="noopener">https://blog.engineyard.com/2011/a-guide-to-optimistic-locking</a><br><a href="http://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html" target="_blank" rel="noopener">http://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html</a></p>
+<h3 id="原帖"><a href="#原帖" class="headerlink" title="原帖"></a>原帖</h3><p><a href="https://ruby-china.org/topics/28963" target="_blank" rel="noopener">https://ruby-china.org/topics/28963</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/03/19/Rails-中乐观锁与悲观锁的使用/">
+    <time datetime="2018-03-19T10:04:00.000Z" class="entry-date">
+        2018-03-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/乐观锁/">乐观锁</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/悲观锁/">悲观锁</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+  
+    <nav id="pagination">
+      <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      </nav>
+    </nav>
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

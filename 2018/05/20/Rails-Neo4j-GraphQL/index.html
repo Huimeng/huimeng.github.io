@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="想要做什么使用GraphQL为存储在图形类型数据库提供API。
+什么是Neo4jNeo4j是NoSQL图形类型数据库的一种类型。顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。在这个例子中, 绿色节点是Person, 红色节点是Movie。写在箭头中的ACTED_IN和DIRECTE">
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Rails + Neo4j + GraphQL【转载】 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="想要做什么使用GraphQL为存储在图形类型数据库提供API。 什么是Neo4jNeo4j是NoSQL图形类型数据库的一种类型。顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。在这个例子中, 绿色节点是Person, 红色节点是Movie。写在箭头中的ACTED_IN和DIRECTED是节点之间的关系。 什么是GraphQLGraphQL是一种API，它可以通过类似于JSON的格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails + Neo4j + GraphQL【转载】">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/Rails-Neo4j-GraphQL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="想要做什么使用GraphQL为存储在图形类型数据库提供API。 什么是Neo4jNeo4j是NoSQL图形类型数据库的一种类型。顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。在这个例子中, 绿色节点是Person, 红色节点是Movie。写在箭头中的ACTED_IN和DIRECTED是节点之间的关系。 什么是GraphQLGraphQL是一种API，它可以通过类似于JSON的格式">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/neo4j-graphql/neo4j-example.png">
+<meta property="og:image" content="http://yoursite.com/img/neo4j-graphql/neo4j-example-graphs.png">
+<meta property="og:image" content="http://yoursite.com/img/neo4j-graphql/node-labels.png">
+<meta property="og:image" content="http://yoursite.com/img/neo4j-graphql/user-follow-neo4j.png">
+<meta property="og:updated_time" content="2018-06-16T11:05:20.724Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails + Neo4j + GraphQL【转载】">
+<meta name="twitter:description" content="想要做什么使用GraphQL为存储在图形类型数据库提供API。 什么是Neo4jNeo4j是NoSQL图形类型数据库的一种类型。顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。在这个例子中, 绿色节点是Person, 红色节点是Movie。写在箭头中的ACTED_IN和DIRECTED是节点之间的关系。 什么是GraphQLGraphQL是一种API，它可以通过类似于JSON的格式">
+<meta name="twitter:image" content="http://yoursite.com/img/neo4j-graphql/neo4j-example.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Rails-Neo4j-GraphQL" class="post-Rails-Neo4j-GraphQL post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Rails + Neo4j + GraphQL【转载】
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/05/20/Rails-Neo4j-GraphQL/" data-id="cju0n5pjo000ijm196zli357v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="想要做什么"><a href="#想要做什么" class="headerlink" title="想要做什么"></a>想要做什么</h3><p>使用GraphQL为存储在图形类型数据库提供API。</p>
+<h3 id="什么是Neo4j"><a href="#什么是Neo4j" class="headerlink" title="什么是Neo4j"></a>什么是Neo4j</h3><p>Neo4j是NoSQL图形类型数据库的一种类型。<br>顾名思义, 图类型数据库就是一个可以处理图结构中的数据的数据库。<br><img src="/img/neo4j-graphql/neo4j-example.png" alt=""><br>在这个例子中, 绿色节点是Person, 红色节点是Movie。<br>写在箭头中的ACTED_IN和DIRECTED是节点之间的关系。</p>
+<h3 id="什么是GraphQL"><a href="#什么是GraphQL" class="headerlink" title="什么是GraphQL"></a>什么是GraphQL</h3><p>GraphQL是一种API，它可以通过类似于JSON的格式的查询集中收集嵌套数据。<br>查询和响应的例子就是这样。</p>
+<pre><code>curl  - XPOST  -  d&apos;  query = {users（name：&quot;taro&quot;）{name followers（）{name}}}&apos; localhost：3101/graphql
+</code></pre><p>返回数据</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;users&quot;: {
+      &quot;name&quot;: &quot;张三&quot;,
+      &quot;followers&quot;: [
+        {&quot;name&quot;: &quot;李四&quot;},
+        {&quot;name&quot;: &quot;王五&quot;}
+      ]
+    }
+  }
+}
+</code></pre><h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><p>我将编写这个程序，从这里实际使用Rails中的Neo 4 j和GraphQL。<br>测试数据使用<br>使用faker生成随机数据（原文使用Twitter的follow数据 ）</p>
+<h3 id="安装Neo4j"><a href="#安装Neo4j" class="headerlink" title="安装Neo4j"></a>安装Neo4j</h3><p>在Mac系统中, Neo4j很容易进行安装。<br>注）主要先安装Java环境 并设置$JAVA_HOME</p>
+<pre><code>＃安装 neo4j 
+brew install neo4j
+＃启动 Neo4j 
+neo4j start
+</code></pre><p>启动后，在浏览器中打开<a href="http://localhost:7474" target="_blank" rel="noopener">http://localhost:7474</a> 将打开Web界面。<br>里面有很多材料，介绍了如何使用Neo4j。<br>例如下图中的示例图将是一个很好的练习。<br><img src="/img/neo4j-graphql/neo4j-example-graphs.png" width="400"> </p>
+<h3 id="创建项目-并使用seed生成数据"><a href="#创建项目-并使用seed生成数据" class="headerlink" title="创建项目 并使用seed生成数据"></a>创建项目 并使用seed生成数据</h3><pre><code># 新建项目
+rails new graphql-neo4j-demo
+</code></pre><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开Gemfile文件 添加相关gem</span></span><br><span class="line">gem <span class="string">'neo4j'</span> <span class="comment"># ruby neo4j数据库</span></span><br><span class="line">gem <span class="string">'graphql'</span> <span class="comment"># graphql api</span></span><br><span class="line">gem <span class="string">'graphql-batch'</span> </span><br><span class="line">gem <span class="string">'neo4j-rake_tasks'</span>, <span class="string">'~&gt; 0.7.18'</span> <span class="comment"># neo4j 的rake集成</span></span><br><span class="line"><span class="comment"># gem 'faker', '~&gt; 1.8', '&gt;= 1.8.7' # 生成假数据</span></span><br><span class="line">gem <span class="string">'ffaker'</span>, <span class="string">'~&gt; 2.9'</span> <span class="comment">#生成中文名</span></span><br><span class="line">group <span class="symbol">:development</span> <span class="keyword">do</span></span><br><span class="line">  gem <span class="string">'graphiql-rails'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>bundle install</code>和<code>rails generate graphql:install</code>安装相关gem和graphql模块。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/neo4j.yml</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">development:</span></span><br><span class="line">  <span class="symbol">type:</span> http</span><br><span class="line">  <span class="symbol">url:</span> <span class="symbol">http:</span>/<span class="regexp">/[username]:[password]@localhost:7474</span></span><br><span class="line"><span class="regexp">test:</span></span><br><span class="line"><span class="regexp">  type: http</span></span><br><span class="line"><span class="regexp">  url: http:/</span><span class="regexp">/[username]:[password]@localhost:7474</span></span><br></pre></td></tr></table></figure>
+<pre><code>bundle exec rails g neo4j:model user user_id:integer screen_name:string name:string
+bundle exec rails g neo4j:model follow
+bundle exec rails neo4j:migrate
+</code></pre><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/user.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line">  <span class="keyword">include</span> Neo4j::ActiveNode</span><br><span class="line">  property <span class="symbol">:user_id</span>, <span class="symbol">type:</span> Integer</span><br><span class="line">  property <span class="symbol">:screen_name</span>, <span class="symbol">type:</span> String</span><br><span class="line">  property <span class="symbol">:name</span>, <span class="symbol">type:</span> String</span><br><span class="line">  has_many <span class="symbol">:in</span>, <span class="symbol">:followers</span>, <span class="symbol">model_class:</span> <span class="symbol">:User</span>, <span class="symbol">rel_class:</span> <span class="symbol">:Follow</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/follow.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Follow</span> </span></span><br><span class="line">  <span class="keyword">include</span> Neo4j::ActiveRel</span><br><span class="line">  from_class <span class="symbol">:User</span></span><br><span class="line">  to_class <span class="symbol">:User</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># db/seeds.rb</span></span><br><span class="line">nodes = []</span><br><span class="line"></span><br><span class="line"><span class="number">20</span>.times <span class="keyword">do</span></span><br><span class="line">  user_id = SecureRandom.uuid</span><br><span class="line">  node = User.create(</span><br><span class="line">    <span class="symbol">user_id:</span> user_id,</span><br><span class="line">    <span class="symbol">name:</span> FFaker::NameCN.name,</span><br><span class="line">    <span class="symbol">screen_name:</span> FFaker::Name.last_name</span><br><span class="line">  )</span><br><span class="line">  nodes &lt;&lt; node</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">follower_ids = []</span><br><span class="line"></span><br><span class="line"><span class="number">30</span>.times <span class="keyword">do</span></span><br><span class="line">  follower_group = nodes.sample(<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">unless</span> follower_ids.<span class="keyword">include</span>?(follower_group.map(&amp;<span class="symbol">:user_id</span>))</span><br><span class="line">    Follow.create(<span class="symbol">from_node:</span> follower_group[<span class="number">0</span>], <span class="symbol">to_node:</span> follower_group[<span class="number">1</span>])</span><br><span class="line">    puts <span class="string">"<span class="subst">#&#123;follower_group[<span class="number">0</span>][<span class="symbol">:screen_name</span>]&#125;</span> -&gt; <span class="subst">#&#123;follower_group[<span class="number">1</span>][<span class="symbol">:screen_name</span>]&#125;</span>"</span></span><br><span class="line">    follower_ids &lt;&lt; follower_group.map(&amp;<span class="symbol">:user_id</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>bundle exec rails db:seed</code>,创建测试种子数据并添加到Neo4j。<br>浏览器打开<code>http://localhost：7474</code>, 请点击下图中的User。<br><img src="/img/neo4j-graphql/node-labels.png" width="400"><br>可以看见他们相互之间的关系如下图所示:<br><img src="/img/neo4j-graphql/user-follow-neo4j.png" alt=""></p>
+<h3 id="GraphQL-API"><a href="#GraphQL-API" class="headerlink" title="GraphQL API"></a>GraphQL API</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/&#123;PROJECT_NAME&#125;_schema.rb</span></span><br><span class="line"></span><br><span class="line">&#123;PROJECT_NAME&#125;Schema = GraphQL::Schema.define <span class="keyword">do</span></span><br><span class="line">  mutation(Types::MutationType)</span><br><span class="line">  query(Types::QueryType)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/types/query_type.rb</span></span><br><span class="line"></span><br><span class="line">Types::QueryType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">"Query"</span></span><br><span class="line">  field <span class="symbol">:users</span>, types.String <span class="keyword">do</span></span><br><span class="line">    type Types::UserType</span><br><span class="line">    description <span class="string">'Twitter user'</span></span><br><span class="line">    argument <span class="symbol">:name</span>, types.String</span><br><span class="line">    resolve -&gt;(obj, args, ctx) &#123;</span><br><span class="line">      User.find_by(<span class="symbol">name:</span> args[<span class="string">'name'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/graphql/types/user_type.rb</span></span><br><span class="line"></span><br><span class="line">Types::UserType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">"User"</span></span><br><span class="line">  description <span class="string">"A Faker User"</span></span><br><span class="line">  field <span class="symbol">:user_id</span>, types.String</span><br><span class="line">  field <span class="symbol">:screen_name</span>, types.String</span><br><span class="line">  field <span class="symbol">:name</span>, types.String</span><br><span class="line">  field <span class="symbol">:uuid</span>, types.String</span><br><span class="line"></span><br><span class="line">  field <span class="symbol">:followers</span>, types[Types::UserType] <span class="keyword">do</span></span><br><span class="line">    argument <span class="symbol">:limit</span>, types.Int, <span class="symbol">default_value:</span> <span class="number">10</span></span><br><span class="line">    resolve -&gt;(user, args, ctx) &#123;</span><br><span class="line">      user.followers.limit(args[<span class="symbol">:size</span>])</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>启动项目 <code>rails s</code>, 打开浏览器输入<code>http://127.0.0.1:3000/graphiql</code><br>在左侧输入如下查询可以查找到follow过’梦盈祭’的用户。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  users(name: &quot;梦盈祭&quot;)&#123;</span><br><span class="line">    name</span><br><span class="line">    screen_name</span><br><span class="line">    user_id</span><br><span class="line">    uuid</span><br><span class="line">    followers()&#123;</span><br><span class="line">      name</span><br><span class="line">      screen_name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查询结果如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"data"</span>: &#123;</span><br><span class="line">    <span class="attr">"users"</span>: &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"梦盈祭"</span>,</span><br><span class="line">      <span class="attr">"screen_name"</span>: <span class="string">"Kuphal"</span>,</span><br><span class="line">      <span class="attr">"user_id"</span>: <span class="string">"c758d246-ac87-468f-b252-5cc90d396480"</span>,</span><br><span class="line">      <span class="attr">"uuid"</span>: <span class="string">"58fd1b6e-d4d0-414c-b1d6-f5478336431f"</span>,</span><br><span class="line">      <span class="attr">"followers"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"秀德茹"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Dietrich"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"纯瑄雍"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Boyer"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"刚妹蒉"</span>,</span><br><span class="line">          <span class="attr">"screen_name"</span>: <span class="string">"Krajcik"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h3><p><a href="https://qiita.com/enkatsu/items/94ad000b76fd9cb89fb4" target="_blank" rel="noopener">https://qiita.com/enkatsu/items/94ad000b76fd9cb89fb4</a></p>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="https://github.com/Huimeng/neo4j-graphql-demo" target="_blank" rel="noopener">https://github.com/Huimeng/neo4j-graphql-demo</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/05/20/Rails-Neo4j-GraphQL/">
+    <time datetime="2018-05-20T02:05:16.000Z" class="entry-date">
+        2018-05-20
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/01/15/Rails-Set-Access-Origin/" rel="prev"><span class="meta-nav">←</span> Rails Set Access Origin</a></span>
+    
+    
+        <span class="nav-next"><a href="/2018/03/27/rails-数据变化的监控/" rel="next">rails 数据变化的监控 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

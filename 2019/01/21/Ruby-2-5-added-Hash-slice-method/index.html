@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="Ruby 2.4Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys nam">
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Ruby 2.5 added Hash#slice method | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ruby 2.4Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys name and description. We can use Hash#select method.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ruby 2.5 added Hash#slice method">
+<meta property="og:url" content="http://yoursite.com/2019/01/21/Ruby-2-5-added-Hash-slice-method/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Ruby 2.4Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys name and description. We can use Hash#select method.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-21T08:47:45.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ruby 2.5 added Hash#slice method">
+<meta name="twitter:description" content="Ruby 2.4Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys name and description. We can use Hash#select method.">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Ruby-2-5-added-Hash-slice-method" class="post-Ruby-2-5-added-Hash-slice-method post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Ruby 2.5 added Hash#slice method
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/21/Ruby-2-5-added-Hash-slice-method/" data-id="cju0n5pjw000vjm19rty2ftfu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="Ruby-2-4"><a href="#Ruby-2-4" class="headerlink" title="Ruby 2.4"></a>Ruby 2.4</h3><p>Let’s say that we have a hash { id: 1, name: ‘Ruby 2.5’, description: ‘BigBinary Blog’ } and we want to select key value pairs having keys name and description.</p>
+<p>We can use <a href="https://ruby-doc.org/core-2.4.2/Hash.html#method-i-select" target="_blank" rel="noopener">Hash#select</a> method.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">irb&gt; blog = &#123; <span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">name:</span> <span class="string">'Ruby 2.5'</span>, <span class="symbol">description:</span> <span class="string">'BigBinary Blog'</span> &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:id=&gt;</span><span class="number">1</span>, <span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">irb&gt; blog.select &#123; <span class="params">|key, value|</span> [<span class="symbol">:name</span>, <span class="symbol">:description</span>].<span class="keyword">include</span>?(key) &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://bugs.ruby-lang.org/users/5184" target="_blank" rel="noopener">Matzbara Masanao</a> proposed a simple method to take care of this.</p>
+<p>Some of the names proposed were choice and pick.</p>
+<p><a href="https://twitter.com/yukihiro_matz" target="_blank" rel="noopener">Matz</a> suggested the name slice since this method is ActiveSupport compatible.</p>
+<p>Ruby 2.5.0</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">irb&gt; blog = &#123; <span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">name:</span> <span class="string">'Ruby 2.5'</span>, <span class="symbol">description:</span> <span class="string">'BigBinary Blog'</span> &#125;</span><br><span class="line">  =&gt; &#123;<span class="symbol">:id=&gt;</span><span class="number">1</span>, <span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line"></span><br><span class="line">irb&gt; blog.slice(<span class="symbol">:name</span>, <span class="symbol">:description</span>)</span><br><span class="line">  =&gt; &#123;<span class="symbol">:name=&gt;<span class="string">"Ruby 2.5"</span></span>, <span class="symbol">:description=&gt;<span class="string">"BigBinary Blog"</span></span>&#125;</span><br><span class="line">As we can see, now we can use a simple method slice to select key value pairs from a hash with specified keys.</span><br></pre></td></tr></table></figure>
+<p>Here is relevant <a href="https://github.com/ruby/ruby/commit/6c50bdda0b" target="_blank" rel="noopener">commit</a> and <a href="https://bugs.ruby-lang.org/issues/13563" target="_blank" rel="noopener">discussion</a>.</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">
+    <time datetime="2019-01-21T08:15:10.000Z" class="entry-date">
+        2019-01-21
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/03/21/use-after-commit-to-replace-after-create/" rel="prev"><span class="meta-nav">←</span> Use after_commit to replace after_create</a></span>
+    
+    
+        <span class="nav-next"><a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/" rel="next">Lonely Operator传说中的单身狗运算符 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/03/rubys-splat-and-double-splat-operators/">An introduction to Ruby `*`Splat and double `**`Splat operators</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-neo4j-rake-tasks-create-test-environment/">Use neo4j-rake_tasks create test environment</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/21/use-after-commit-to-replace-after-create/">Use after_commit to replace after_create</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Ruby-2-5-added-Hash-slice-method/">Ruby 2.5 added Hash#slice method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/Lonely-Operator传说中的单身狗运算符/">Lonely Operator传说中的单身狗运算符</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewars/">codewars</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务，锁/">事务，锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前后端分离/">前后端分离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/悲观锁/">悲观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模糊查询/">模糊查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/codewars/" style="font-size: 17.5px;">codewars</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/ruby/" style="font-size: 20px;">ruby</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/乐观锁/" style="font-size: 10px;">乐观锁</a> <a href="/tags/事务，锁/" style="font-size: 12.5px;">事务，锁</a> <a href="/tags/前后端分离/" style="font-size: 10px;">前后端分离</a> <a href="/tags/悲观锁/" style="font-size: 10px;">悲观锁</a> <a href="/tags/模糊查询/" style="font-size: 10px;">模糊查询</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 Wayne Liu
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
